@@ -37,6 +37,14 @@ h1 em{font-style:italic;color:var(--clay)}
 .about .ab{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem}
 .about .abk{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.4rem}
 .about .abv{font-size:.86rem;color:var(--ink);line-height:1.5}
+.about .num{color:var(--clay);font-weight:500;font-family:var(--mono);font-size:.92em}
+.cite{font-size:.76rem;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:.85rem;margin:0 0 1.9rem}
+.cite a{color:var(--teal)}
+.phasediv{display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:wrap;margin:0 0 1.5rem}
+.phasediv .ph{font-family:var(--mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:.32rem .65rem;border-radius:999px;border:1px solid currentColor;font-weight:500}
+.phasediv .ph-a{color:var(--teal)}
+.phasediv .ph-b{color:var(--clay)}
+.phasediv .ph-arrow{font-size:.78rem;color:var(--muted)}
 .tag{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
   padding:.18rem .5rem;border-radius:999px;border:1px solid currentColor}
 .tag.measured{color:var(--teal)} .tag.slider{color:var(--amber)} .tag.out{color:var(--clay)}
@@ -140,9 +148,17 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   </div>
 
   <div class="about">
-    <div class="ab"><div class="abk">The study</div><div class="abv">A retrospective look at 457,950 adults with a documented COVID infection across 58 US hospitals (4 regions), 2020–2024.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
-    <div class="ab"><div class="abk">What it found</div><div class="abv">1 in 6 developed Long COVID and 1 in 7 a chronic condition needing ongoing care — more than double what diagnostic codes capture, and still rising through 2024.</div></div>
-    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions that appear 3+ months after infection, persist 2+ months, and aren't explained by prior illness; a clinician then classified each by chronicity. 89% of cases qualified.</div></div>
+    <div class="ab"><div class="abk">The study</div><div class="abv">A retrospective study of <b class="num">457,950</b> adults with a documented COVID infection, across <b class="num">58</b> US hospitals in <b class="num">4</b> regions, <b class="num">2020–2024</b>.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
+    <div class="ab"><div class="abk">What it found</div><div class="abv"><b class="num">1 in 6</b> developed Long COVID; <b class="num">1 in 7</b> a chronic condition needing ongoing care — over <b class="num">2×</b> what diagnostic codes capture, and still rising through <b class="num">2024</b>.</div></div>
+    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions appearing <b class="num">3+ months</b> after infection, persisting <b class="num">2+ months</b>, not explained by prior illness; a clinician classified each by chronicity. <b class="num">89%</b> were chronic.</div></div>
+  </div>
+
+  <div class="cite">Tian J, Azhir A, Decaro M, Chau N, Hügel J, Morris M, Cheng J, Fard P, Bassett IV, Bell DS, Bernstam EV, Visweswaran S, Klann JG, Murphy SN, Estiri H. Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals. <em>JAMA Network Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></div>
+
+  <div class="phasediv">
+    <span class="ph ph-a">What the study measured</span>
+    <span class="ph-arrow">now project it across everyone infected ↓</span>
+    <span class="ph ph-b">Your modeled estimate</span>
   </div>
 
   <div class="grid">
