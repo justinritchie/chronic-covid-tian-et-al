@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Long COVID Chronic-Burden Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EEE3; --paper2:#E9E3D4; --panel:#FBF9F3;
+  --ink:#211F18; --muted:#6E6857; --line:rgba(33,31,24,.14);
+  --teal:#0F6E56; --amber:#B0741A; --clay:#9E3D2B;
+  --display:'Fraunces',Georgia,serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;
+  background-image:radial-gradient(rgba(33,31,24,.035) 1px,transparent 1px);background-size:22px 22px;}
+.wrap{max-width:1120px;margin:0 auto;padding:clamp(1.2rem,4vw,3rem) clamp(1rem,4vw,2.2rem) 4rem;}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin:0 0 .8rem}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.02;letter-spacing:-.01em;margin:.1rem 0 .7rem}
+h1 em{font-style:italic;color:var(--clay)}
+.dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:62ch;margin:0 0 1.4rem}
+.rule{height:2px;background:var(--ink);width:54px;margin:0 0 2rem}
+.fn{font-family:var(--mono);font-size:.6em;color:var(--teal);text-decoration:none;font-weight:500;vertical-align:super;
+  padding:0 .12em;border-bottom:1px dotted var(--teal);white-space:nowrap}
+.fn:hover{color:var(--clay);border-color:var(--clay)}
+.hero{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(1.1rem,3vw,1.8rem);margin-bottom:1.6rem;
+  display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start}
+.hero .lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:.35rem}
+.hero .big{font-family:var(--display);font-size:clamp(2.2rem,6vw,3.2rem);font-weight:600;line-height:1;letter-spacing:-.02em}
+.hero .sub{color:var(--muted);font-size:.92rem;max-width:30ch;margin-top:.3rem}
+.hero .div{width:1px;align-self:stretch;background:var(--line)}
+.tag{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.18rem .5rem;border-radius:999px;border:1px solid currentColor}
+.tag.measured{color:var(--teal)} .tag.slider{color:var(--amber)} .tag.out{color:var(--clay)}
+.grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:1.6rem}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem}
+.panel h2{font-family:var(--display);font-weight:500;font-size:1.18rem;margin:.1rem 0 1.1rem;display:flex;justify-content:space-between;align-items:baseline}
+.ctl{margin-bottom:1.1rem;padding:.55rem .7rem;margin-left:-.7rem;margin-right:-.7rem;border-radius:10px;background:transparent}
+.ctl.flash{animation:flashbg 1.2s ease}
+@keyframes flashbg{0%{background:rgba(158,61,43,.16)}100%{background:transparent}}
+.ctl > label{display:flex;justify-content:space-between;align-items:baseline;font-weight:500;font-size:.92rem;margin-bottom:.15rem}
+.ctl .val{font-family:var(--mono);color:var(--clay);font-size:.95rem}
+.ctl .note{font-size:.76rem;color:var(--muted);margin-top:.3rem}
+.ctl .note a{color:var(--teal)}
+.ctl .derived{font-family:var(--mono);font-size:.72rem;color:var(--ink);margin-top:.5rem;padding-left:.6rem;border-left:2px solid var(--teal)}
+.ctl .derived b{color:var(--teal);font-weight:500}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
+@keyframes thumbpulse{0%,100%{box-shadow:0 0 0 1px var(--clay),0 0 0 0 rgba(158,61,43,0)}50%{box-shadow:0 0 0 1px var(--clay),0 0 0 7px rgba(158,61,43,.15)}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.seg button{font-family:var(--body);font-size:.82rem;font-weight:500;padding:.5rem .3rem;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;cursor:pointer;transition:all .15s}
+.seg button:hover{border-color:var(--amber)}
+.seg button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.seg-traj button{display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.15;padding:.45rem .3rem}
+.bt{font-weight:500;font-size:.84rem}
+.bsub{font-size:.66rem;opacity:.7;font-weight:400}
+.seg-traj button.on .bsub{opacity:.9}
+.trajinfo{margin-top:.7rem;font-size:.8rem;color:var(--ink);background:var(--paper2);border-radius:10px;padding:.65rem .8rem;line-height:1.45}
+.trajinfo .ev{display:block;margin-top:.45rem;font-size:.74rem;color:var(--muted)}
+.trajinfo .evlink{color:var(--teal);text-decoration:none;border-bottom:1px dotted var(--teal);white-space:nowrap}
+.trajinfo .evlink:hover{color:var(--clay);border-color:var(--clay)}
+.out-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.headline-lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);max-width:32ch}
+.headline{font-family:var(--display);font-weight:600;font-size:clamp(2.6rem,8vw,4.6rem);line-height:.95;letter-spacing:-.02em;color:var(--clay);margin:.25rem 0 0}
+.headline .u{font-size:.42em;color:var(--ink)}
+.pctbox{border:1px solid var(--clay);border-radius:12px;padding:.55rem .9rem;text-align:center;min-width:120px}
+.pctbox .pctn{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1;color:var(--clay)}
+.pctbox .pctl{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.subs{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.3rem 0 0}
+@media(max-width:520px){.subs{grid-template-columns:1fr}}
+.stat{border-top:2px solid var(--ink);padding-top:.55rem}
+.stat .n{font-family:var(--mono);font-size:1.55rem;font-weight:500}
+.stat .n .pct{font-size:.66rem;color:var(--muted);letter-spacing:.04em;margin-left:.35rem}
+.stat .l{font-size:.8rem;color:var(--muted);margin-top:.1rem}
+.stat.ghost{border-top-color:var(--line)} .stat.ghost .n{color:var(--muted)}
+.chartwrap{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.1rem}
+.chartwrap h3,.pyr h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .7rem}
+.charth{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.ytoggle{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:.35rem;cursor:pointer}
+.ytoggle input{accent-color:var(--clay);cursor:pointer;width:14px;height:14px}
+.yearcap{font-size:.74rem;color:var(--muted);margin-top:.55rem;font-style:italic}
+svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin-top:.5rem}
+.legend i{display:inline-block;width:12px;height:2px;vertical-align:middle;margin-right:.35rem}
+.pyr{margin-top:1.6rem}
+.pyr .hint{font-size:.72rem;color:var(--muted);margin:-.3rem 0 .7rem;font-style:italic}
+.tier{margin:0 auto .2rem;color:#fff;font-size:.8rem;font-weight:500;text-align:center;padding:.42rem .6rem;border-radius:3px;
+  display:flex;justify-content:space-between;gap:.6rem;align-items:center;transition:width .3s,transform .12s,filter .12s}
+.tier small{font-family:var(--mono);font-weight:400;opacity:.9;font-size:.74rem}
+.tier.tappable{cursor:pointer}
+.tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
+.tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
+.found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;color:var(--muted);text-align:center}
+.note-block{background:var(--paper2);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.9rem;color:var(--ink)}
+.note-block b{color:var(--clay)}
+footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
+footer a{color:var(--teal)} footer ol{margin:.5rem 0 0;padding-left:1.4rem} footer li{margin-bottom:.3rem}
+footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
+.disc{font-size:.74rem;color:var(--muted);font-style:italic;margin-top:.4rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
+  <h1>How many Americans live with a <em>chronic</em> condition developed from COVID?</h1>
+  <p class="dek">Start from what the study actually measured — then set the assumptions the data can't settle yourself. Every number below the headline rate is yours to move.</p>
+  <div class="rule"></div>
+
+  <div class="hero">
+    <div>
+      <div class="lab">Measured · per infection · no extrapolation</div>
+      <div class="big">1 in 6</div>
+      <div class="sub">of people with a documented COVID infection developed a new, lasting condition needing medical care (16.3%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>).</div>
+    </div>
+    <div class="div"></div>
+    <div>
+      <div class="lab">…of which chronic</div>
+      <div class="big">1 in 7</div>
+      <div class="sub">developed a new <b>chronic</b> condition requiring ongoing care (14.5%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>). <span class="tag measured">measured</span></div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- CONTROLS -->
+    <div class="panel">
+      <h2>Your assumptions <span class="tag slider">you set these</span></h2>
+
+      <div class="ctl" id="ctl-traj">
+        <label>Reinfection trajectory <span class="val" id="trajVal">Declines</span></label>
+        <div class="note" style="margin-top:0;margin-bottom:.55rem">As you get reinfected, does the chance of a <em>new</em> chronic condition fall, stay flat, or build? Science hasn't settled this — and it swings the result more than any other choice here.</div>
+        <div class="seg seg-traj" id="traj">
+          <button data-t="Eliminated"><span class="bt">Eliminated</span><span class="bsub">one &amp; done</span></button>
+          <button data-t="Declines" class="on"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
+          <button data-t="Flat"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
+          <button data-t="Compounds"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+        </div>
+        <div class="trajinfo" id="trajInfo"></div>
+      </div>
+
+      <div class="ctl" id="ctl-inf">
+        <label>Average infections per person <span class="val" id="infVal">5</span></label>
+        <input type="range" id="avgInf" min="1" max="10" step="1" value="5">
+        <div class="note">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative — profile">4</a>). Tian counts only the first.</div>
+        <div class="derived" id="infRate">…</div>
+      </div>
+
+      <div class="ctl" id="ctl-persist">
+        <label>Persistence — share still active long-term <span class="val" id="perVal">90%</span></label>
+        <input type="range" id="persist" min="50" max="98" step="1" value="90">
+        <div class="note">Tian can't tell if conditions resolved. Anchor: in ME/CFS, a chronic post-viral illness, only ~5% fully recover (median of 28 studies)<a class="fn" href="#s2" title="Cairns &amp; Hotopf, Occupational Medicine 2005">2</a>.</div>
+      </div>
+
+      <div class="ctl" id="ctl-share">
+        <label>Share of adults ever infected <span class="val" id="siVal">90%</span></label>
+        <input type="range" id="infShare" min="70" max="95" step="1" value="90">
+        <div class="note">CDC seroprevalence: ~77.5% by end-2022, rising since<a class="fn" href="#s5" title="CDC infection-induced seroprevalence, MMWR">5</a>.</div>
+      </div>
+
+      <div class="ctl" id="ctl-adj">
+        <label>Per-infection rate adjustment <span class="val" id="adjVal">1.00×</span></label>
+        <input type="range" id="netAdj" min="0.7" max="1.3" step="0.05" value="1.0">
+        <div class="note">Net of milder undocumented infections (lower) vs. missed mild cases &amp; worsened pre-existing conditions (higher).</div>
+      </div>
+    </div>
+
+    <!-- OUTPUTS -->
+    <div class="panel">
+      <div class="out-head">
+        <div>
+          <div class="headline-lab">Currently living with a chronic post-COVID condition</div>
+          <div class="headline"><span id="hActive">63</span><span class="u">M</span></div>
+        </div>
+        <div class="pctbox">
+          <div class="pctn" id="hPct">24%</div>
+          <div class="pctl">of U.S. adults</div>
+        </div>
+      </div>
+
+      <div class="subs">
+        <div class="stat"><div class="n"><span id="sEver">70M</span><span class="pct" id="sEverPct">27% of adults</span></div><div class="l">Ever developed one (accumulating; only goes up)</div></div>
+        <div class="stat"><div class="n" id="sInst">79M</div><div class="l">Accumulated conditions (they stack across reinfections)</div></div>
+        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID" — a recognized <b>floor</b><a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
+        <div class="stat ghost"><div class="n">15M</div><div class="l">What official surveillance counts (Tian documented-case floor<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>)</div></div>
+      </div>
+
+      <div class="chartwrap">
+        <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span>
+          <label class="ytoggle"><input type="checkbox" id="yearTog"> Year overlay</label></h3>
+        <svg id="chart" viewBox="0 0 520 230" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
+        <div class="legend">
+          <span><i style="background:#9E3D2B"></i>selected</span>
+          <span><i style="background:#B0741A"></i>other trajectories</span>
+          <span><i style="background:#0F6E56"></i>your infection count</span>
+        </div>
+        <div class="yearcap" id="yearCap" style="display:none">Top axis = the calendar year each infection lands in if the observed pace holds (~0.85/yr, anchored so the 5th ≈ 2026). Shaded = future projection.</div>
+      </div>
+
+      <div class="pyr">
+        <h3>The conservatism pyramid — counted → true burden</h3>
+        <div class="hint">Tap any amber or red layer to jump to the assumption behind it.</div>
+        <div id="pyramid"></div>
+        <div class="found">Foundation: <b>the recognition gap</b> — most people file a new condition under "getting older" or "the vaccine," never COVID.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-block">
+    <b>How to read this.</b> The headline rate (top) is what Tian <em>measured</em> — no extrapolation. Everything below depends on assumptions the data can't settle, so you set them. The study itself says resolution "cannot be reliably determined,"<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so its count is people <b>ever</b> identified, not <b>currently active</b> — which is exactly why persistence is a slider, anchored to how chronic conditions behave generally. Self-report is shown as a floor, never a cap, because recognizing Long COVID requires knowing you have it.
+    <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
+  </div>
+
+  <footer>
+    <strong>Sources</strong> — click any <a class="fn" href="#s1" title="example">n</a> above to jump here; each links out.
+    <ol>
+      <li id="s1">Tian J, et al. Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals. <em>JAMA Netw Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></li>
+      <li id="s2">Cairns R, Hotopf M. A systematic review describing the prognosis of chronic fatigue syndrome. <em>Occup Med.</em> 2005;55(1):20–31. <a href="https://doi.org/10.1093/occmed/kqi013" target="_blank" rel="noopener">doi:10.1093/occmed/kqi013</a></li>
+      <li id="s3">Bowe B, Xie Y, Al-Aly Z. Acute and postacute sequelae associated with SARS-CoV-2 reinfection. <em>Nat Med.</em> 2022. <a href="https://doi.org/10.1038/s41591-022-02051-3" target="_blank" rel="noopener">doi:10.1038/s41591-022-02051-3</a></li>
+      <li id="s4">Hoerger M — Pandemic Mitigation Collaborative (U.S. cumulative-infection estimates, wastewater). <a href="https://x.com/michael_hoerger" target="_blank" rel="noopener">@michael_hoerger</a> · <a href="https://www.pmc19.com/" target="_blank" rel="noopener">pmc19.com</a></li>
+      <li id="s5">CDC. Seroprevalence of Infection-Induced SARS-CoV-2 Antibodies, US, Sep 2021–Feb 2022. <a href="https://www.cdc.gov/mmwr/volumes/71/wr/mm7117e3.htm" target="_blank" rel="noopener">MMWR</a></li>
+      <li id="s6">CDC NCHS. Long COVID — Household Pulse Survey. <a href="https://www.cdc.gov/nchs/covid19/pulse/long-covid.htm" target="_blank" rel="noopener">cdc.gov/nchs</a></li>
+      <li id="s7">Antonelli M, et al. Risk of long COVID associated with delta versus omicron variants of SARS-CoV-2. <em>Lancet.</em> 2022;399(10343):2263–2264. <a href="https://doi.org/10.1016/S0140-6736(22)00941-2" target="_blank" rel="noopener">doi:10.1016/S0140-6736(22)00941-2</a></li>
+    </ol>
+  </footer>
+</div>
+
+<script>
+const C={adults:262e6,docCases:103e6,anyFirst:0.1628,chronicFirst:0.1454,selfEver:0.30};
+const TRAJ={Eliminated:0,Declines:0.6,Flat:1.0,Compounds:1.2};
+const ORDER=["Eliminated","Declines","Flat","Compounds"];
+const TRAJ_INFO={
+  Eliminated:{d:"Only your first infection can cause Long COVID — get through that one without it and later infections add no new risk.",ev:"Optimistic bound. Assumes immunity fully protects; not directly evidenced.",href:null},
+  Declines:{d:"Each reinfection is less likely to cause a new chronic condition than the one before — built-up immunity and milder variants blunt the risk.",ev:"Antonelli et al., Lancet 2022 — Omicron carried roughly half the Long COVID odds of Delta.",href:"#s7"},
+  Flat:{d:"Every infection carries the same risk — each one an independent roll of the dice, no better and no worse than the first.",ev:"Neutral baseline. Assumes no trend in either direction.",href:null},
+  Compounds:{d:"Each reinfection adds more risk than the last — organ damage builds up with every hit.",ev:"Bowe, Xie & Al-Aly, Nature Medicine 2022 — cumulative risk rises with each infection.",href:"#s3"}
+};
+const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
+const NMAX=10;
+let S={traj:"Declines",avgInf:5,persist:0.90,infShare:0.90,netAdj:1.0,yearLayer:false};
+
+const pk=(base,f,k)=>Math.min(base*(k===1?1:Math.pow(f,k-1)),1);
+function cumRisk(base,f,n){let s=1;for(let k=1;k<=n;k++)s*=(1-pk(base,f,k));return 1-s;}
+function load(base,f,n){let t=0;for(let k=1;k<=n;k++)t+=pk(base,f,k);return t;}
+const M=x=>Math.round(x/1e6)+"M";
+const PCT=x=>Math.round(x/C.adults*100)+"%";
+
+function compute(){
+  const everInf=C.adults*S.infShare;
+  const baseC=C.chronicFirst*S.netAdj;
+  const everRisk=cumRisk(baseC,TRAJ[S.traj],S.avgInf);
+  const everPeople=everInf*everRisk;
+  const active=everPeople*S.persist;
+  const inst=everInf*load(baseC,TRAJ[S.traj],S.avgInf);
+  const selfFloor=everInf*C.selfEver;
+  return {everInf,baseC,everRisk,everPeople,active,inst,selfFloor};
+}
+
+function drawChart(baseC){
+  const x0=40,x1=505,y0=18,y1=196,maxR=1;
+  const X=k=>x0+(k-1)/(NMAX-1)*(x1-x0), Y=r=>y1-Math.min(r,maxR)/maxR*(y1-y0);
+  const START=2020.2,PACE=(2026-START)/5,yearFor=k=>START+k*PACE,nowX=X(5);
+  let g="";
+  if(S.yearLayer) g+=`<rect x="${nowX}" y="${y0}" width="${x1-nowX}" height="${y1-y0}" fill="#B0741A" fill-opacity=".07"/>`;
+  g+=`<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" stroke="#211F18" stroke-width="1"/>`;
+  g+=`<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="#211F18" stroke-width="1"/>`;
+  [0,.25,.5,.75,1].forEach(r=>{g+=`<text x="${x0-6}" y="${Y(r)+4}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="end">${Math.round(r*100)}%</text>`;
+    g+=`<line x1="${x0}" y1="${Y(r)}" x2="${x1}" y2="${Y(r)}" stroke="#211F18" stroke-opacity=".08"/>`;});
+  for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle">${k}</text>`;
+  if(S.yearLayer){
+    for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B0741A':'#6E6857'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
+    g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#211F18" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
+    g+=`<text x="${nowX+4}" y="${y1-5}" font-size="9" font-family="IBM Plex Mono" fill="#6E6857">2026 · now</text>`;
+  }
+  g+=`<line x1="${X(S.avgInf)}" y1="${y0}" x2="${X(S.avgInf)}" y2="${y1}" stroke="${COL.mark}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+  ORDER.forEach(t=>{
+    let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,TRAJ[t],k))}`);
+    const sel=t===S.traj;
+    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${sel?COL.sel:COL.other}" stroke-width="${sel?2.6:1.2}" stroke-opacity="${sel?1:.45}"/>`;
+    if(sel){const ry=Y(cumRisk(baseC,TRAJ[t],S.avgInf));g+=`<circle cx="${X(S.avgInf)}" cy="${ry}" r="4.5" fill="${COL.sel}"/>`;}
+  });
+  document.getElementById("chart").innerHTML=g;
+}
+
+function drawPyramid(r){
+  const tiers=[
+    {l:"Officially coded (U09.9)",v:"<7%",w:38,c:"#6E6857",ctl:null},
+    {l:"Clinically detected (Tian)",v:"14.5%/inf",w:50,c:"#0F6E56",ctl:null},
+    {l:"+ Undocumented infections",v:"~"+M(r.everInf),w:62,c:"#0F6E56",ctl:"ctl-share"},
+    {l:"+ Care never sought",v:"slider",w:74,c:"#B0741A",ctl:"ctl-adj"},
+    {l:"+ Pre-existing worsened",v:"slider",w:84,c:"#B0741A",ctl:"ctl-adj"},
+    {l:"+ Reinfections (×"+S.avgInf+")",v:"slider",w:94,c:"#B0741A",ctl:"ctl-traj"},
+    {l:"Currently active chronic",v:M(r.active),w:100,c:"#9E3D2B",ctl:"ctl-persist"}
+  ];
+  document.getElementById("pyramid").innerHTML=tiers.map(t=>{
+    const tap=t.ctl?` tappable" onclick="focusCtl('${t.ctl}')" title="Adjust the assumption behind this layer`:"";
+    const arrow=t.ctl?'<span class="arrow">↗</span>':'';
+    return `<div class="tier${tap}" style="width:${t.w}%;background:${t.c}"><span>${t.l}</span><small>${t.v}${arrow}</small></div>`;
+  }).join("");
+}
+
+function focusCtl(id){
+  const el=document.getElementById(id);
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+}
+
+function render(){
+  const r=compute();
+  document.getElementById("hActive").textContent=Math.round(r.active/1e6);
+  document.getElementById("hPct").textContent=PCT(r.active);
+  document.getElementById("sEver").textContent=M(r.everPeople);
+  document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
+  document.getElementById("sInst").textContent=M(r.inst);
+  document.getElementById("sFloorSelf").textContent=M(r.selfFloor);
+  document.getElementById("trajVal").textContent=S.traj;
+  const ti=TRAJ_INFO[S.traj];
+  document.getElementById("trajInfo").innerHTML=ti.d+'<span class="ev"><b>Evidence:</b> '+ti.ev+(ti.href?' <a class="evlink" href="'+ti.href+'">source ↗</a>':'')+'</span>';
+  document.getElementById("infVal").textContent=S.avgInf;
+  document.getElementById("perVal").textContent=Math.round(S.persist*100)+"%";
+  document.getElementById("siVal").textContent=Math.round(S.infShare*100)+"%";
+  document.getElementById("adjVal").textContent=S.netAdj.toFixed(2)+"×";
+  const yrs=(new Date()-new Date(2020,2,1))/(365.25*864e5);
+  document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs) — you set the total; the yearly rate follows`;
+  drawChart(r.baseC); drawPyramid(r);
+}
+
+document.querySelectorAll("#traj button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll("#traj button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); S.traj=b.dataset.t; render();
+}));
+const bind=(id,key,fn)=>document.getElementById(id).addEventListener("input",e=>{S[key]=fn(e.target.value);render();});
+bind("avgInf","avgInf",v=>+v);
+bind("persist","persist",v=>+v/100);
+bind("infShare","infShare",v=>+v/100);
+bind("netAdj","netAdj",v=>+v);
+document.getElementById("yearTog").addEventListener("change",e=>{S.yearLayer=e.target.checked;document.getElementById("yearCap").style.display=e.target.checked?"block":"none";render();});
+render();
+</script>
+</body>
+</html>
