@@ -314,8 +314,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="chartwrap">
-        <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span>
-          <label class="ytoggle" title="Maps the infection-count axis to calendar years using the average pace (~0.85 infections/yr), so the 5th ≈ 2026"><input type="checkbox" id="yearTog"> Project avg. infection rate (calendar years)</label></h3>
+        <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span></h3>
         <div class="chartcap" id="chartCap"></div>
         <svg id="chart" viewBox="0 0 520 238" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
@@ -397,7 +396,7 @@ function compute(){
 }
 
 function drawChart(baseC){
-  const x0=52,x1=505,y0=18,y1=196,maxR=1;
+  const x0=62,x1=505,y0=18,y1=196,maxR=1;
   const X=k=>x0+(k-1)/(NMAX-1)*(x1-x0), Y=r=>y1-Math.min(r,maxR)/maxR*(y1-y0);
   const START=2020.2,PACE=(2026-START)/5,yearFor=k=>START+k*PACE,nowX=X(5);
   let g='<defs><linearGradient id="selFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9E3D2B" stop-opacity="0.13"/><stop offset="100%" stop-color="#9E3D2B" stop-opacity="0"/></linearGradient></defs>';
@@ -408,7 +407,9 @@ function drawChart(baseC){
     g+=`<line x1="${x0}" y1="${Y(r)}" x2="${x1}" y2="${Y(r)}" stroke="#211F18" stroke-opacity=".08"/>`;});
   for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle">${k}</text>`;
   g+=`<text x="${(x0+x1)/2}" y="230" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" letter-spacing=".4">Number of infections (per person)</text>`;
-  g+=`<text x="13" y="${(y0+y1)/2}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 13 ${(y0+y1)/2})">Cumulative chance (%)</text>`;
+  const ymid=(y0+y1)/2;
+  g+=`<text x="12" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 12 ${ymid})">Chronic condition</text>`;
+  g+=`<text x="24" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 24 ${ymid})">cumulative chance (%)</text>`;
   if(S.yearLayer){
     for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B0741A':'#6E6857'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
     g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#211F18" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
@@ -513,9 +514,13 @@ function render(){
     ? `Adds ≈ <b>${M(subAdd)}</b> with measurable subclinical injury but no diagnosed condition, on top of the <b>${M(r.everPeople)}</b> cumulative chronic. Combined ≈ <b>${M(subTotal)}</b> ever affected. <i>Speculative; not in the headline or chart.</i>`
     : `<i>Off. Dial up to add a speculative subclinical layer on top of the estimate above.</i>`;
   document.getElementById("pyrClar").innerHTML=`These bars are to scale and shift as you change the assumptions above. Each widens the population: from those <b>officially counted</b>, to what Tian et al. <b>clinically detected</b>, to everyone who <b>ever developed</b> a chronic condition under your assumptions. Below the waterline, subclinical injury (set by the dial) adds people with measurable damage but no diagnosis.`;
-  document.getElementById("chartCap").innerHTML=on
+  const yrTip="Maps the infection-count axis to calendar years at the average pace (~0.85 infections/yr), so the 5th ≈ 2026";
+  const yrLink=S.yearLayer
+    ? ` These are now placed on <span class="cl" data-yeartoggle title="${yrTip}">calendar years</span>; click to switch back.`
+    : ` You can also project the average infection rate across <span class="cl" data-yeartoggle title="${yrTip}">calendar years</span>.`;
+  document.getElementById("chartCap").innerHTML=(on
     ? `Each curve projects the cumulative chance of a <em>new</em> chronic condition as infections repeat. Your <b>${S.traj}</b> path is <span class="cl" data-h="clay">in clay</span> and the dot marks your settings (<b>${PCT(r.everPeople)}</b> ever affected). Hover <span class="cl" data-h="Declines">declines</span>, <span class="cl" data-h="Flat">flat</span>, <span class="cl" data-h="Compounds">compounds</span>, or the <span class="cl" data-h="all">other curves</span> to compare.`
-    : `The <span class="cl" data-h="clay">straight clay line</span> is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The <span class="cl" data-h="all">other curves</span> project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`;
+    : `The <span class="cl" data-h="clay">straight clay line</span> is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The <span class="cl" data-h="all">other curves</span> project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`)+yrLink;
   drawChart(r.baseC); drawPyramid(r);
 }
 
@@ -542,7 +547,7 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
   document.getElementById("subclin").value=S.subclin;
   render();
 });
-document.getElementById("yearTog").addEventListener("change",e=>{S.yearLayer=e.target.checked;document.getElementById("yearCap").style.display=e.target.checked?"block":"none";render();});
+document.querySelector(".chartwrap").addEventListener("click",e=>{if(e.target.closest("[data-yeartoggle]")){S.yearLayer=!S.yearLayer;document.getElementById("yearCap").style.display=S.yearLayer?"block":"none";render();}});
 [document.querySelector(".chartwrap"),document.getElementById("traj")].forEach(el=>{
   el.addEventListener("mouseover",e=>{const h=e.target.closest("[data-h]");if(h){S.hover=h.dataset.h;drawChart(S.chronRate);}});
   el.addEventListener("mouseout",e=>{const h=e.target.closest("[data-h]");if(h){S.hover=null;drawChart(S.chronRate);}});
