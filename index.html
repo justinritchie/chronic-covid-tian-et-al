@@ -37,7 +37,7 @@ h1 em{font-style:italic;color:var(--clay)}
 .about .ab{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem}
 .about .abk{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.4rem}
 .about .abv{font-size:.86rem;color:var(--ink);line-height:1.5}
-.about .num{color:var(--clay);font-weight:500;font-family:var(--mono);font-size:.92em}
+.about .num{color:var(--clay);font-weight:500}
 .cite{font-size:.76rem;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:.85rem;margin:0 0 1.9rem}
 .cite a{color:var(--teal)}
 .phasediv{display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:wrap;margin:0 0 1.5rem}
@@ -101,22 +101,17 @@ svg{display:block;width:100%;height:auto}
 .legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin-top:.5rem}
 .legend i{display:inline-block;width:12px;height:2px;vertical-align:middle;margin-right:.35rem}
 .pyr{margin-top:1.6rem}
-.pyr .hint{font-size:.72rem;color:var(--muted);margin:-.3rem 0 .7rem;font-style:italic}
-.tier{margin:0 auto .2rem;color:#fff;font-size:.8rem;font-weight:500;text-align:center;padding:.42rem .6rem;border-radius:3px;
-  display:flex;justify-content:space-between;gap:.6rem;align-items:center;transition:width .3s,transform .12s,filter .12s}
-.tier small{font-family:var(--mono);font-weight:400;opacity:.9;font-size:.74rem}
-.tier.tappable{cursor:pointer}
-.tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
-.tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
-.found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.75rem .85rem;font-size:.82rem;color:var(--muted);text-align:left}
-.found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
-.gapbar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.65rem 0 .4rem;background:var(--line)}
-.gapseg{height:100%;transition:width .3s}
-.gap-rec{background:#6E6857}
-.gap-un{background:#9E3D2B}
-.gapcap{font-size:.76rem;line-height:1.5}
-.gapcap b{color:var(--ink);font-weight:500}
-.gapcap .un{color:var(--clay)}
+.pyr .hint{font-size:.72rem;color:var(--muted);margin:-.3rem 0 .55rem;font-style:italic}
+.pyrclar{font-size:.74rem;color:var(--muted);line-height:1.5;margin:.7rem 0 .1rem;border-top:1px solid var(--line);padding-top:.6rem}
+.pyrclar b{color:var(--clay);font-weight:500}
+.takeaways{margin-top:2.2rem}
+.takeaways .tkh{font-family:var(--display);font-weight:500;font-size:1.3rem;margin:0 0 1rem}
+.tkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:820px){.tkgrid{grid-template-columns:1fr}}
+.tk{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;border-top:3px solid var(--clay)}
+.tk .tkn{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.tk .tkt{font-family:var(--display);font-weight:500;font-size:1.1rem;margin-bottom:.45rem;color:var(--clay)}
+.tk .tkb{font-size:.85rem;color:var(--ink);line-height:1.55}
 .note-block{background:var(--paper2);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.9rem;color:var(--ink)}
 .note-block b{color:var(--clay)}
 footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
@@ -240,6 +235,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <h3>The conservatism pyramid — counted → true burden</h3>
         <div class="hint">Tap any amber or red layer to jump to the assumption behind it.</div>
         <div id="pyramid"></div>
+        <div class="pyrclar" id="pyrClar"></div>
         <div class="found">
           <div class="foundlead">Foundation — the recognition gap</div>
           Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else — and never connect it to COVID.
@@ -253,6 +249,15 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   <div class="note-block">
     <b>How to read this.</b> The headline rate (top) is what Tian <em>measured</em> — no extrapolation. Everything below depends on assumptions the data can't settle, so you set them. The study itself says resolution "cannot be reliably determined,"<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so its count is people <b>ever</b> identified, not <b>currently active</b> — which is exactly why persistence is a slider, anchored to how chronic conditions behave generally. Self-report is shown as a floor, never a cap, because recognizing Long COVID requires knowing you have it.
     <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
+  </div>
+
+  <div class="takeaways">
+    <h3 class="tkh">Three things this makes clear</h3>
+    <div class="tkgrid">
+      <div class="tk"><div class="tkn">Is it fading?</div><div class="tkt">No — it's accumulating</div><div class="tkb">Per-infection risk didn't fall as acute illness got milder, and cumulative prevalence kept climbing through 2024. "COVID got mild" doesn't mean Long COVID is receding.</div></div>
+      <div class="tk"><div class="tkn">Are we counting it?</div><div class="tkt">Surveillance sees a fraction</div><div class="tkb">Validated AI phenotyping found more than 2× what diagnostic codes capture. Most chronic post-COVID disease is managed under other labels and never linked to COVID.</div></div>
+      <div class="tk"><div class="tkn">Why it keeps growing</div><div class="tkt">Reinfections compound it</div><div class="tkb">The study counts only first infections, yet the average American has had ~5. The true population burden hinges on an unsettled per-reinfection risk — and is likely larger than first-infection numbers imply.</div></div>
+    </div>
   </div>
 
   <footer>
@@ -330,7 +335,7 @@ function drawPyramid(r){
   const tiers=[
     {l:"Officially coded (U09.9)",v:"<7%",w:38,c:"#6E6857",ctl:null},
     {l:"Clinically detected (Tian)",v:"14.5%/inf",w:50,c:"#0F6E56",ctl:null},
-    {l:"+ Undocumented infections",v:"~"+M(r.everInf),w:62,c:"#0F6E56",ctl:"ctl-share"},
+    {l:"+ Everyone ever infected",v:"~"+M(r.everInf),w:62,c:"#0F6E56",ctl:"ctl-share"},
     {l:"+ Care never sought",v:"slider",w:74,c:"#B0741A",ctl:"ctl-adj"},
     {l:"+ Pre-existing worsened",v:"slider",w:84,c:"#B0741A",ctl:"ctl-adj"},
     {l:"+ Reinfections (×"+S.avgInf+")",v:"slider",w:94,c:"#B0741A",ctl:"ctl-traj"},
@@ -372,6 +377,8 @@ function render(){
   document.getElementById("gapEver").textContent=M(everC);
   document.getElementById("gapNum").textContent="~"+M(gp);
   document.getElementById("gapPct").textContent=PCT(gp);
+  const events=S.avgInf*r.everInf;
+  document.getElementById("pyrClar").innerHTML=`Each band removes a blind spot. The upper bands widen <b>who is counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections — it doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`;
   drawChart(r.baseC); drawPyramid(r);
 }
 
