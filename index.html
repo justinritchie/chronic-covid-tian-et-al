@@ -22,7 +22,7 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);l
 .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin:0 0 .8rem}
 h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.02;letter-spacing:-.01em;margin:.1rem 0 .7rem}
 h1 em{font-style:italic;color:var(--clay)}
-.dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:62ch;margin:0 0 1.4rem}
+.dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 1.4rem}
 .rule{height:2px;background:var(--ink);width:54px;margin:0 0 2rem}
 h1,.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
 .dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.trajinfo,.note-block{text-wrap:pretty}
@@ -58,6 +58,10 @@ h1,.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
 @media(min-width:1024px){.grid{grid-template-columns:minmax(0,340px) minmax(0,1fr)}}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem}
 .panel h2{font-family:var(--display);font-weight:500;font-size:1.18rem;margin:.1rem 0 1.1rem;display:flex;justify-content:space-between;align-items:baseline}
+.resetrow{display:flex;justify-content:center;margin:-.5rem 0 1rem}
+.reset{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.34rem .8rem;cursor:pointer;transition:border-color .15s,background .15s}
+.reset:hover{border-color:var(--clay);background:rgba(158,61,43,.06)}
+.reset:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
 .ctl{margin-bottom:1.1rem;padding:.55rem .7rem;margin-left:-.7rem;margin-right:-.7rem;border-radius:10px;background:transparent}
 .ctl.flash{animation:flashbg 1.2s ease}
 @keyframes flashbg{0%{background:rgba(158,61,43,.16)}100%{background:transparent}}
@@ -67,6 +71,14 @@ h1,.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
 .ctl .note a{color:var(--teal)}
 .ctl .derived{font-family:var(--mono);font-size:.72rem;color:var(--ink);margin-top:.5rem;padding-left:.6rem;border-left:2px solid var(--teal)}
 .ctl .derived b{color:var(--teal);font-weight:500}
+.ctl.off{opacity:.5}
+.ctl.off input[type=range]{cursor:not-allowed}
+.offhint{font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic}
+.raterow{margin:.8rem 0 .2rem;padding:.65rem .8rem;background:var(--paper2);border-radius:10px}
+.raterow .ratelab{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.82rem;font-weight:500;margin-bottom:.1rem}
+.raterow .rateval{font-family:var(--mono);color:var(--clay);font-size:.82rem;white-space:nowrap}
+.chartcap{font-size:.78rem;color:var(--muted);line-height:1.5;margin-top:.65rem;text-wrap:pretty}
+.chartcap b{color:var(--ink);font-weight:500}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
@@ -74,6 +86,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 input[type=range]:focus-visible,.seg button:focus-visible,.ytoggle input:focus-visible,.fn:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
 .headline,.pctbox .pctn,.stat .n,.ctl .val,.ctl .derived,.gapcap,.about .num,.tier small{font-variant-numeric:tabular-nums}
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.seg-traj{grid-template-columns:repeat(3,1fr)}
 .seg button{font-family:var(--body);font-size:.82rem;font-weight:500;padding:.5rem .3rem;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;cursor:pointer;transition:all .15s}
 .seg button:hover{border-color:var(--amber)}
 .seg button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -147,8 +160,8 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 <body>
 <div class="wrap">
   <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
-  <h1>How many Americans live with a <em>chronic</em> condition developed from COVID?</h1>
-  <p class="dek">Start from what the study measured. Then set the assumptions it couldn't, and watch the estimate move. Every figure below the headline rate is yours to change.</p>
+  <h1>How many Americans live with a <em>chronic</em> condition developed after a COVID infection?</h1>
+  <p class="dek">A 2026 study across 58 hospitals found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. So how big is the true number? Start from what the study measured, then set the assumptions you find plausible and watch the estimate move.</p>
   <div class="rule"></div>
 
   <div class="hero">
@@ -183,29 +196,34 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     <!-- CONTROLS -->
     <div class="panel">
       <h2>Your assumptions <span class="tag slider">you set these</span></h2>
+      <div class="resetrow"><button class="reset" id="resetBtn" type="button">↺ Reset to Tian et al. baseline</button></div>
 
       <div class="ctl" id="ctl-traj">
-        <label>How does repeat infection change the risk? <span class="val" id="trajVal">Declines</span></label>
-        <div class="note" style="margin-bottom:.6rem">Does the chance of a <em>new</em> chronic condition fall, stay flat, or build with each reinfection? Science hasn't settled this, and it swings the result more than any other lever here.</div>
+        <label>How does repeat infection change the risk? <span class="val" id="trajVal">Off</span></label>
+        <div class="note" style="margin-bottom:.6rem">Tian et al. counted only each patient's first infection, so this starts <b>off</b>. Turn on a trajectory to project what repeat infections add. The science isn't settled, and it swings the result more than any other lever here.</div>
         <div class="seg seg-traj" id="traj">
-          <button data-t="Eliminated"><span class="bt">Eliminated</span><span class="bsub">one &amp; done</span></button>
-          <button data-t="Declines" class="on"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
-          <button data-t="Flat"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
-          <button data-t="Compounds"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+          <button data-t="Declines" type="button"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
+          <button data-t="Flat" type="button"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
+          <button data-t="Compounds" type="button"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+        </div>
+        <div class="raterow" id="rateRow" hidden>
+          <div class="ratelab"><span id="rateLabel">How fast does it change each time?</span> <span class="rateval" id="rateVal">×0.60</span></div>
+          <input type="range" id="rateSlider" min="0.3" max="0.95" step="0.05" value="0.6">
         </div>
         <div class="trajinfo" id="trajInfo"></div>
       </div>
 
       <div class="ctl" id="ctl-inf">
         <label>Average infections per person <span class="val" id="infVal">5</span></label>
-        <div class="note">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative, profile">4</a>). Tian counts only the first.</div>
+        <div class="note" id="infNote">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative, profile">4</a>). Tian et al. count only the first.</div>
+        <div class="offhint" id="infOff" hidden>Reinfection modeling is off, so this has no effect yet. Turn on a trajectory above to vary it.</div>
         <input type="range" id="avgInf" min="1" max="10" step="1" value="5">
         <div class="derived" id="infRate">…</div>
       </div>
 
       <div class="ctl" id="ctl-persist">
-        <label>Persistence: share still active long-term <span class="val" id="perVal">90%</span></label>
-        <div class="note">Tian can't tell if conditions resolved. Anchor: in ME/CFS, a chronic post-viral illness, only ~5% fully recover (median of 28 studies)<a class="fn" href="#s2" title="Cairns &amp; Hotopf, Occupational Medicine 2005">2</a>.</div>
+        <label>Chronic condition persistence <span class="val" id="perVal">90%</span></label>
+        <div class="note">Share still living with the condition long-term. Tian et al. can't tell whether conditions resolved. Anchor: in ME/CFS, a chronic post-viral illness, only ~5% fully recover (median of 28 studies)<a class="fn" href="#s2" title="Cairns &amp; Hotopf, Occupational Medicine 2005">2</a>.</div>
         <input type="range" id="persist" min="50" max="98" step="1" value="90">
       </div>
 
@@ -216,9 +234,9 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="ctl" id="ctl-adj">
-        <label>Risk adjustment <span class="val" id="adjVal">1.00×</span></label>
-        <div class="note">Fine-tune the per-infection rate: lower if untested infections were milder, higher if many real cases go missed.</div>
-        <input type="range" id="netAdj" min="0.7" max="1.3" step="0.05" value="1.0">
+        <label>Chronic conditions per infection <span class="val" id="adjVal">14.5%</span></label>
+        <div class="note">Tian et al. measured 14.5% per documented infection. Raise it if missed or untested infections hide real cases; lower it if undocumented infections were milder.</div>
+        <input type="range" id="chronRate" min="0.10" max="0.19" step="0.005" value="0.145">
       </div>
     </div>
 
@@ -237,8 +255,8 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
       <div class="subs">
         <div class="stat"><div class="n"><span id="sEver">70M</span><span class="pct" id="sEverPct">27% of adults</span></div><div class="l">Ever developed one (accumulating; only goes up)</div></div>
-        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID." A lower bound — many never connect their symptoms to COVID<a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
-        <div class="stat ghost"><div class="n">15M</div><div class="l">What official tracking counts today. The real total is higher, since most cases are never coded<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
+        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID." A lower bound, since many never connect their symptoms to COVID<a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
+        <div class="stat ghost"><div class="n">15M</div><div class="l">Report Long COVID right now in the CDC's ongoing national survey<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, ~5–7% of adults currently">6</a>. Medical billing codes capture even fewer<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>.</div></div>
       </div>
 
       <div class="chartwrap">
@@ -246,10 +264,11 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
           <label class="ytoggle"><input type="checkbox" id="yearTog"> Year overlay</label></h3>
         <svg id="chart" viewBox="0 0 520 230" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
-          <span><i style="background:#9E3D2B"></i>selected</span>
+          <span><i style="background:#9E3D2B"></i>your scenario</span>
           <span><i style="background:#B0741A"></i>other trajectories</span>
           <span><i style="background:#0F6E56"></i>your infection count</span>
         </div>
+        <div class="chartcap" id="chartCap"></div>
         <div class="yearcap" id="yearCap" style="display:none">Top axis = the calendar year each infection lands in if the observed pace holds (~0.85/yr, anchored so the 5th ≈ 2026). Shaded = future projection.</div>
       </div>
 
@@ -262,23 +281,23 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
           <div class="foundlead">Foundation: the recognition gap</div>
           Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else, and never connect it to COVID.
           <div class="gapbar"><span class="gapseg gap-rec" id="gapRec" style="width:21%"></span><span class="gapseg gap-un" id="gapUn" style="width:79%"></span></div>
-          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one. That leaves a recognition gap of <b class="un" id="gapNum">~55M</b> (<b class="un" id="gapPct">21%</b> of U.S. adults) who developed a chronic condition and never connected it to COVID.</div>
+          <div class="gapcap">The CDC's national survey counts <b>~15M</b> with Long COVID now. This model implies <b id="gapEver">70M</b> ever developed a chronic condition. That leaves a recognition gap of <b class="un" id="gapNum">~55M</b> (<b class="un" id="gapPct">21%</b> of U.S. adults) who developed one and never connected it to COVID.</div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="note-block">
-    <b>How to read this.</b> The headline rate (top) is what Tian <em>measured</em>. Everything below it depends on assumptions the data can't settle, so you set them and the estimate updates. The study can't tell how many cases resolved,<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so it counts people <b>ever</b> affected, not those active today; the persistence slider bridges that gap.
+    <b>How to read this.</b> The headline rate (top) is what Tian et al. <em>measured</em>. Everything below it depends on assumptions the data can't settle, so you set them and the estimate updates. The study can't tell how many cases resolved,<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so it counts people <b>ever</b> affected, not those active today; the persistence slider bridges that gap.
     <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
   </div>
 
   <div class="takeaways">
     <h3 class="tkh">Key findings from the Tian et al. study</h3>
     <div class="tkgrid">
-      <div class="tk"><div class="tkn">Predominantly chronic</div><div class="tkt">Not a passing syndrome</div><div class="tkb">Of everyone who developed Long COVID, 89% had a chronic condition needing ongoing care (14.5% of all infected). The authors frame PASC as a chronic disease burden, not a self-limited illness.</div></div>
-      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Diagnostic codes miss most cases</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that standard diagnostic codes capture. The majority are managed under other labels, invisible to official tracking.</div></div>
-      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">Accumulating, not fading</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
+      <div class="tk"><div class="tkn">Predominantly chronic</div><div class="tkt">COVID infections are associated with developing a chronic condition</div><div class="tkb">Of everyone who developed Long COVID, 89% had a chronic condition needing ongoing care (14.5% of all infected). The authors frame PASC as a chronic disease burden, not a self-limited illness.</div></div>
+      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Diagnostic codes created for Long COVID miss most cases</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that standard diagnostic codes capture. The majority are managed under other labels, invisible to official tracking.</div></div>
+      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">The burden of chronic conditions tied to Long COVID keeps rising</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
     </div>
   </div>
 
@@ -298,33 +317,32 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
 <script>
 const C={adults:262e6,docCases:103e6,anyFirst:0.1628,chronicFirst:0.1454,selfEver:0.30};
-const TRAJ={Eliminated:0,Declines:0.6,Flat:1.0,Compounds:1.2};
-const ORDER=["Eliminated","Declines","Flat","Compounds"];
+const ORDER=["Declines","Flat","Compounds"];
 const TRAJ_INFO={
-  Eliminated:{d:"Only your first infection can cause Long COVID. Get through that one without it, and later infections add no new risk.",ev:"Optimistic bound. Assumes immunity fully protects; not directly evidenced.",href:null},
   Declines:{d:"Each reinfection is less likely to cause a new chronic condition than the one before. Built-up immunity and milder variants blunt the risk.",ev:"Antonelli et al., Lancet 2022: Omicron carried roughly half the Long COVID odds of Delta.",href:"#s7"},
   Flat:{d:"Every infection carries the same risk. Each one is an independent roll of the dice, no better and no worse than the first.",ev:"Neutral baseline. Assumes no trend in either direction.",href:null},
   Compounds:{d:"Each reinfection adds more risk than the last. Organ damage builds up with every hit.",ev:"Bowe, Xie & Al-Aly, Nature Medicine 2022: cumulative risk rises with each infection.",href:"#s3"}
 };
+const TRAJ_OFF="Reinfection isn't modeled, matching Tian et al., who counted only each patient's first infection. Pick a trajectory above to project what repeat infections would add.";
 const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
 const NMAX=10;
-let S={traj:"Declines",avgInf:5,persist:0.90,infShare:0.90,netAdj:1.0,yearLayer:false};
+const DEFAULTS={traj:null,avgInf:5,persist:0.90,infShare:0.90,chronRate:0.145,declRate:0.6,compRate:1.2};
+let S=Object.assign({yearLayer:false},DEFAULTS);
+const factorOf=t=>t==="Declines"?S.declRate:t==="Compounds"?S.compRate:t==="Flat"?1:0;
 
 const pk=(base,f,k)=>Math.min(base*(k===1?1:Math.pow(f,k-1)),1);
 function cumRisk(base,f,n){let s=1;for(let k=1;k<=n;k++)s*=(1-pk(base,f,k));return 1-s;}
-function load(base,f,n){let t=0;for(let k=1;k<=n;k++)t+=pk(base,f,k);return t;}
 const M=x=>Math.round(x/1e6)+"M";
 const PCT=x=>Math.round(x/C.adults*100)+"%";
 
 function compute(){
   const everInf=C.adults*S.infShare;
-  const baseC=C.chronicFirst*S.netAdj;
-  const everRisk=cumRisk(baseC,TRAJ[S.traj],S.avgInf);
+  const baseC=S.chronRate;
+  const everRisk=S.traj?cumRisk(baseC,factorOf(S.traj),S.avgInf):baseC;
   const everPeople=everInf*everRisk;
   const active=everPeople*S.persist;
-  const inst=everInf*load(baseC,TRAJ[S.traj],S.avgInf);
   const selfFloor=everInf*C.selfEver;
-  return {everInf,baseC,everRisk,everPeople,active,inst,selfFloor};
+  return {everInf,baseC,everRisk,everPeople,active,selfFloor};
 }
 
 function drawChart(baseC){
@@ -343,27 +361,35 @@ function drawChart(baseC){
     g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#211F18" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
     g+=`<text x="${nowX+4}" y="${y1-5}" font-size="9" font-family="IBM Plex Mono" fill="#6E6857">2026 · now</text>`;
   }
-  let area=[];for(let k=1;k<=NMAX;k++)area.push(`${X(k)},${Y(cumRisk(baseC,TRAJ[S.traj],k))}`);
-  area.push(`${X(NMAX)},${y1}`,`${X(1)},${y1}`);
-  g+=`<polygon points="${area.join(" ")}" fill="url(#selFill)" stroke="none"/>`;
-  g+=`<line x1="${X(S.avgInf)}" y1="${y0}" x2="${X(S.avgInf)}" y2="${y1}" stroke="${COL.mark}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
   ORDER.forEach(t=>{
-    let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,TRAJ[t],k))}`);
-    const sel=t===S.traj;
-    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${sel?COL.sel:COL.other}" stroke-width="${sel?2.6:1.2}" stroke-opacity="${sel?1:.45}"/>`;
-    if(sel){const ry=Y(cumRisk(baseC,TRAJ[t],S.avgInf));g+=`<circle cx="${X(S.avgInf)}" cy="${ry}" r="4.5" fill="${COL.sel}"/>`;}
+    if(t===S.traj) return;
+    let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,factorOf(t),k))}`);
+    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.other}" stroke-width="1.2" stroke-opacity=".4"/>`;
   });
+  if(S.traj){
+    const f=factorOf(S.traj);
+    let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,f,k))}`);
+    g+=`<polygon points="${pts.join(" ")} ${X(NMAX)},${y1} ${X(1)},${y1}" fill="url(#selFill)" stroke="none"/>`;
+    g+=`<line x1="${X(S.avgInf)}" y1="${y0}" x2="${X(S.avgInf)}" y2="${y1}" stroke="${COL.mark}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.sel}" stroke-width="2.6"/>`;
+    const ry=Y(cumRisk(baseC,f,S.avgInf));g+=`<circle cx="${X(S.avgInf)}" cy="${ry}" r="4.5" fill="${COL.sel}"/>`;
+  } else {
+    const yb=Y(baseC);
+    g+=`<polygon points="${X(1)},${yb} ${X(NMAX)},${yb} ${X(NMAX)},${y1} ${X(1)},${y1}" fill="url(#selFill)" stroke="none"/>`;
+    g+=`<line x1="${X(1)}" y1="${yb}" x2="${X(NMAX)}" y2="${yb}" stroke="${COL.sel}" stroke-width="2.6"/>`;
+    g+=`<circle cx="${X(1)}" cy="${yb}" r="4.5" fill="${COL.sel}"/>`;
+  }
   document.getElementById("chart").innerHTML=g;
 }
 
 function drawPyramid(r){
   const tiers=[
     {l:"Officially coded (U09.9)",v:"<7%",w:38,c:"#6E6857",ctl:null},
-    {l:"Clinically detected (Tian)",v:"14.5%/inf",w:50,c:"#0F6E56",ctl:null},
+    {l:"Clinically detected (Tian et al.)",v:"14.5%/inf",w:50,c:"#0F6E56",ctl:null},
     {l:"+ Everyone ever infected",v:"~"+M(r.everInf),w:62,c:"#0F6E56",ctl:"ctl-share"},
     {l:"+ Care never sought",v:"slider",w:74,c:"#B0741A",ctl:"ctl-adj"},
     {l:"+ Pre-existing worsened",v:"slider",w:84,c:"#B0741A",ctl:"ctl-adj"},
-    {l:"+ Reinfections (×"+S.avgInf+")",v:"slider",w:94,c:"#B0741A",ctl:"ctl-traj"},
+    {l:"+ Reinfections"+(S.traj?" (×"+S.avgInf+")":" (off)"),v:S.traj?"slider":"—",w:94,c:"#B0741A",ctl:"ctl-traj"},
     {l:"Currently active chronic",v:M(r.active),w:100,c:"#9E3D2B",ctl:"ctl-persist"}
   ];
   document.getElementById("pyramid").innerHTML=tiers.map(t=>{
@@ -380,19 +406,36 @@ function focusCtl(id){
 }
 
 function render(){
-  const r=compute();
+  const r=compute(); const on=!!S.traj;
   document.getElementById("hActive").textContent=Math.round(r.active/1e6);
   document.getElementById("hPct").textContent=PCT(r.active);
   document.getElementById("sEver").textContent=M(r.everPeople);
   document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
   document.getElementById("sFloorSelf").textContent=M(r.selfFloor);
-  document.getElementById("trajVal").textContent=S.traj;
-  const ti=TRAJ_INFO[S.traj];
-  document.getElementById("trajInfo").innerHTML=ti.d+'<span class="ev"><b>Evidence:</b> '+ti.ev+(ti.href?' <a class="evlink" href="'+ti.href+'">source ↗</a>':'')+'</span>';
+  document.getElementById("trajVal").textContent=on?S.traj:"Off";
+  document.querySelectorAll("#traj button").forEach(x=>x.classList.toggle("on",x.dataset.t===S.traj));
+  if(on){const ti=TRAJ_INFO[S.traj];
+    document.getElementById("trajInfo").innerHTML=ti.d+'<span class="ev"><b>Evidence:</b> '+ti.ev+(ti.href?' <a class="evlink" href="'+ti.href+'">source ↗</a>':'')+'</span>';
+  } else { document.getElementById("trajInfo").innerHTML=TRAJ_OFF; }
+  const rateRow=document.getElementById("rateRow"), rs=document.getElementById("rateSlider");
+  if(S.traj==="Declines"||S.traj==="Compounds"){
+    rateRow.hidden=false;
+    if(S.traj==="Declines"){rs.min=0.3;rs.max=0.95;rs.step=0.05;rs.value=S.declRate;
+      document.getElementById("rateLabel").textContent="How fast does the risk fall each time?";
+      document.getElementById("rateVal").textContent="×"+S.declRate.toFixed(2)+" per infection";
+    } else {rs.min=1.05;rs.max=1.6;rs.step=0.05;rs.value=S.compRate;
+      document.getElementById("rateLabel").textContent="How fast does the risk build each time?";
+      document.getElementById("rateVal").textContent="×"+S.compRate.toFixed(2)+" per infection";}
+  } else { rateRow.hidden=true; }
+  const infCtl=document.getElementById("ctl-inf"), infEl=document.getElementById("avgInf");
+  infCtl.classList.toggle("off",!on); infEl.disabled=!on;
+  document.getElementById("infNote").hidden=!on;
+  document.getElementById("infOff").hidden=on;
+  document.getElementById("infRate").style.display=on?"":"none";
   document.getElementById("infVal").textContent=S.avgInf;
   document.getElementById("perVal").textContent=Math.round(S.persist*100)+"%";
   document.getElementById("siVal").textContent=Math.round(S.infShare*100)+"%";
-  document.getElementById("adjVal").textContent=S.netAdj.toFixed(2)+"×";
+  document.getElementById("adjVal").textContent=(S.chronRate*100).toFixed(1)+"%";
   const yrs=(new Date()-new Date(2020,2,1))/(365.25*864e5);
   document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs). You set the total; the rate follows.`;
   const recog=15e6, everC=r.everPeople, gp=Math.max(0,everC-recog), recFrac=everC>0?Math.min(recog/everC,1):1;
@@ -401,20 +444,37 @@ function render(){
   document.getElementById("gapEver").textContent=M(everC);
   document.getElementById("gapNum").textContent="~"+M(gp);
   document.getElementById("gapPct").textContent=PCT(gp);
-  const events=S.avgInf*r.everInf;
-  document.getElementById("pyrClar").innerHTML=`Each band removes a blind spot. The upper bands widen <b>who gets counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections. It doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`;
+  const effInf=on?S.avgInf:1, events=effInf*r.everInf;
+  document.getElementById("pyrClar").innerHTML=on
+    ? `Each band removes a blind spot. The upper bands widen <b>who gets counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections. It doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`
+    : `Each band widens <b>who gets counted</b> (codes → clinical detection → everyone infected). Reinfection modeling is off, so each person is counted with a single infection, the Tian et al. baseline.`;
+  document.getElementById("chartCap").innerHTML=on
+    ? `Each line is a scenario for how the chance of a <em>new</em> chronic condition changes as infections repeat. The clay dot marks your settings; its height is the cumulative chance one person has developed a chronic condition, the figure behind <b>${PCT(r.everPeople)}</b> ever affected above.`
+    : `With reinfection modeling off, the chance stays flat at Tian et al.'s per-infection rate (<b>${(r.baseC*100).toFixed(1)}%</b>), the straight clay line. The faint curves show what turning on a trajectory would do.`;
   drawChart(r.baseC); drawPyramid(r);
 }
 
 document.querySelectorAll("#traj button").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll("#traj button").forEach(x=>x.classList.remove("on"));
-  b.classList.add("on"); S.traj=b.dataset.t; render();
+  S.traj=(S.traj===b.dataset.t)?null:b.dataset.t; render();
 }));
+document.getElementById("rateSlider").addEventListener("input",e=>{
+  const v=+e.target.value;
+  if(S.traj==="Declines") S.declRate=v; else if(S.traj==="Compounds") S.compRate=v;
+  render();
+});
 const bind=(id,key,fn)=>document.getElementById(id).addEventListener("input",e=>{S[key]=fn(e.target.value);render();});
 bind("avgInf","avgInf",v=>+v);
 bind("persist","persist",v=>+v/100);
 bind("infShare","infShare",v=>+v/100);
-bind("netAdj","netAdj",v=>+v);
+bind("chronRate","chronRate",v=>+v);
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  Object.assign(S,DEFAULTS);
+  document.getElementById("avgInf").value=S.avgInf;
+  document.getElementById("persist").value=Math.round(S.persist*100);
+  document.getElementById("infShare").value=Math.round(S.infShare*100);
+  document.getElementById("chronRate").value=S.chronRate;
+  render();
+});
 document.getElementById("yearTog").addEventListener("change",e=>{S.yearLayer=e.target.checked;document.getElementById("yearCap").style.display=e.target.checked?"block":"none";render();});
 render();
 </script>
