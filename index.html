@@ -140,7 +140,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 <div class="wrap">
   <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
   <h1>How many Americans live with a <em>chronic</em> condition developed from COVID?</h1>
-  <p class="dek">Start from what the study actually measured — then set the assumptions the data can't settle yourself. Every number below the headline rate is yours to move.</p>
+  <p class="dek">Start from what the study measured. Then set the assumptions it couldn't, and watch the estimate move. Every figure below the headline rate is yours to change.</p>
   <div class="rule"></div>
 
   <div class="hero">
@@ -159,8 +159,8 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
   <div class="about">
     <div class="ab"><div class="abk">The study</div><div class="abv">A retrospective study of <b class="num">457,950</b> adults with a documented COVID infection, across <b class="num">58</b> US hospitals in <b class="num">4</b> regions, <b class="num">2020–2024</b>.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
-    <div class="ab"><div class="abk">What it found</div><div class="abv"><b class="num">1 in 6</b> developed Long COVID; <b class="num">1 in 7</b> a chronic condition needing ongoing care — over <b class="num">2×</b> what diagnostic codes capture, and still rising through <b class="num">2024</b>.</div></div>
-    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions appearing <b class="num">3+ months</b> after infection, persisting <b class="num">2+ months</b>, not explained by prior illness; a clinician classified each by chronicity. <b class="num">89%</b> were chronic.</div></div>
+    <div class="ab"><div class="abk">What it found</div><div class="abv"><b class="num">1 in 6</b> developed Long COVID, <b class="num">1 in 7</b> a chronic condition needing ongoing care. That is over <b class="num">2×</b> what diagnostic codes capture, and the share kept rising through <b class="num">2024</b>.</div></div>
+    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions appearing <b class="num">3+ months</b> after infection, persisting <b class="num">2+ months</b>, not explained by prior illness. A clinician then classified each by chronicity. <b class="num">89%</b> were chronic.</div></div>
   </div>
 
   <div class="cite">Tian J, Azhir A, Decaro M, Chau N, Hügel J, Morris M, Cheng J, Fard P, Bassett IV, Bell DS, Bernstam EV, Visweswaran S, Klann JG, Murphy SN, Estiri H. Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals. <em>JAMA Network Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></div>
@@ -178,7 +178,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
       <div class="ctl" id="ctl-traj">
         <label>Reinfection trajectory <span class="val" id="trajVal">Declines</span></label>
-        <div class="note" style="margin-top:0;margin-bottom:.55rem">As you get reinfected, does the chance of a <em>new</em> chronic condition fall, stay flat, or build? Science hasn't settled this — and it swings the result more than any other choice here.</div>
+        <div class="note" style="margin-top:0;margin-bottom:.55rem">As you get reinfected, does the chance of a <em>new</em> chronic condition fall, stay flat, or build? Science hasn't settled this, and it swings the result more than any other lever here.</div>
         <div class="seg seg-traj" id="traj">
           <button data-t="Eliminated"><span class="bt">Eliminated</span><span class="bsub">one &amp; done</span></button>
           <button data-t="Declines" class="on"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
@@ -191,12 +191,12 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <div class="ctl" id="ctl-inf">
         <label>Average infections per person <span class="val" id="infVal">5</span></label>
         <input type="range" id="avgInf" min="1" max="10" step="1" value="5">
-        <div class="note">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative — profile">4</a>). Tian counts only the first.</div>
+        <div class="note">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative, profile">4</a>). Tian counts only the first.</div>
         <div class="derived" id="infRate">…</div>
       </div>
 
       <div class="ctl" id="ctl-persist">
-        <label>Persistence — share still active long-term <span class="val" id="perVal">90%</span></label>
+        <label>Persistence: share still active long-term <span class="val" id="perVal">90%</span></label>
         <input type="range" id="persist" min="50" max="98" step="1" value="90">
         <div class="note">Tian can't tell if conditions resolved. Anchor: in ME/CFS, a chronic post-viral illness, only ~5% fully recover (median of 28 studies)<a class="fn" href="#s2" title="Cairns &amp; Hotopf, Occupational Medicine 2005">2</a>.</div>
       </div>
@@ -208,9 +208,9 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="ctl" id="ctl-adj">
-        <label>Per-infection rate adjustment <span class="val" id="adjVal">1.00×</span></label>
+        <label>Risk adjustment <span class="val" id="adjVal">1.00×</span></label>
         <input type="range" id="netAdj" min="0.7" max="1.3" step="0.05" value="1.0">
-        <div class="note">Net of milder undocumented infections (lower) vs. missed mild cases &amp; worsened pre-existing conditions (higher).</div>
+        <div class="note">Fine-tune the per-infection rate: lower if untested infections were milder, higher if many real cases go missed.</div>
       </div>
     </div>
 
@@ -229,8 +229,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
       <div class="subs">
         <div class="stat"><div class="n"><span id="sEver">70M</span><span class="pct" id="sEverPct">27% of adults</span></div><div class="l">Ever developed one (accumulating; only goes up)</div></div>
-        <div class="stat"><div class="n" id="sInst">79M</div><div class="l">Accumulated conditions (they stack across reinfections)</div></div>
-        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID" — a recognized <b>floor</b><a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
+        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID," a recognized <b>floor</b><a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
         <div class="stat ghost"><div class="n">15M</div><div class="l">What official surveillance counts (Tian documented-case floor<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>)</div></div>
       </div>
 
@@ -247,22 +246,22 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="pyr">
-        <h3>The conservatism pyramid — counted → true burden</h3>
+        <h3>The conservatism pyramid: counted → true burden</h3>
         <div class="hint">Tap any amber or red layer to jump to the assumption behind it.</div>
         <div id="pyramid"></div>
         <div class="pyrclar" id="pyrClar"></div>
         <div class="found">
-          <div class="foundlead">Foundation — the recognition gap</div>
-          Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else — and never connect it to COVID.
+          <div class="foundlead">Foundation: the recognition gap</div>
+          Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else, and never connect it to COVID.
           <div class="gapbar"><span class="gapseg gap-rec" id="gapRec" style="width:21%"></span><span class="gapseg gap-un" id="gapUn" style="width:79%"></span></div>
-          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one — a recognition gap of <b class="un" id="gapNum">~55M</b>, or <b class="un" id="gapPct">21%</b> of U.S. adults, who developed a chronic condition and never connected it to COVID.</div>
+          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one. That leaves a recognition gap of <b class="un" id="gapNum">~55M</b> (<b class="un" id="gapPct">21%</b> of U.S. adults) who developed a chronic condition and never connected it to COVID.</div>
         </div>
       </div>
     </div>
   </div>
 
   <div class="note-block">
-    <b>How to read this.</b> The headline rate (top) is what Tian <em>measured</em> — no extrapolation. Everything below depends on assumptions the data can't settle, so you set them. The study itself says resolution "cannot be reliably determined,"<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so its count is people <b>ever</b> identified, not <b>currently active</b> — which is exactly why persistence is a slider, anchored to how chronic conditions behave generally. Self-report is shown as a floor, never a cap, because recognizing Long COVID requires knowing you have it.
+    <b>How to read this.</b> The headline rate (top) is what Tian <em>measured</em>. Everything below it depends on assumptions the data can't settle, so you set them and the estimate updates. The study can't tell how many cases resolved,<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so it counts people <b>ever</b> affected, not those active today; the persistence slider bridges that gap.
     <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
   </div>
 
@@ -270,20 +269,20 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     <h3 class="tkh">Key findings from the Tian et al. study</h3>
     <div class="tkgrid">
       <div class="tk"><div class="tkn">Predominantly chronic</div><div class="tkt">Not a passing syndrome</div><div class="tkb">Of everyone who developed Long COVID, 89% had a chronic condition needing ongoing care (14.5% of all infected). The authors frame PASC as a chronic disease burden, not a self-limited illness.</div></div>
-      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Codes miss most of it</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that diagnostic codes capture — the majority are managed under other labels and stay invisible to official tracking.</div></div>
-      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">Accumulating, not fading</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination — the authors describe an accumulating burden rather than a resolving one.</div></div>
+      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Codes miss most of it</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that diagnostic codes capture. The majority are managed under other labels, invisible to official tracking.</div></div>
+      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">Accumulating, not fading</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
     </div>
   </div>
 
   <footer>
-    <strong>Sources</strong> — click any <a class="fn" href="#s1" title="example">n</a> above to jump here; each links out.
+    <strong>Sources.</strong> Click any <a class="fn" href="#s1" title="example">n</a> above to jump here; each links out.
     <ol>
       <li id="s1">Tian J, et al. Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals. <em>JAMA Netw Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></li>
       <li id="s2">Cairns R, Hotopf M. A systematic review describing the prognosis of chronic fatigue syndrome. <em>Occup Med.</em> 2005;55(1):20–31. <a href="https://doi.org/10.1093/occmed/kqi013" target="_blank" rel="noopener">doi:10.1093/occmed/kqi013</a></li>
       <li id="s3">Bowe B, Xie Y, Al-Aly Z. Acute and postacute sequelae associated with SARS-CoV-2 reinfection. <em>Nat Med.</em> 2022. <a href="https://doi.org/10.1038/s41591-022-02051-3" target="_blank" rel="noopener">doi:10.1038/s41591-022-02051-3</a></li>
-      <li id="s4">Hoerger M — Pandemic Mitigation Collaborative (U.S. cumulative-infection estimates, wastewater). <a href="https://x.com/michael_hoerger" target="_blank" rel="noopener">@michael_hoerger</a> · <a href="https://www.pmc19.com/" target="_blank" rel="noopener">pmc19.com</a></li>
+      <li id="s4">Hoerger M. Pandemic Mitigation Collaborative (U.S. cumulative-infection estimates, wastewater). <a href="https://x.com/michael_hoerger" target="_blank" rel="noopener">@michael_hoerger</a> · <a href="https://www.pmc19.com/" target="_blank" rel="noopener">pmc19.com</a></li>
       <li id="s5">CDC. Seroprevalence of Infection-Induced SARS-CoV-2 Antibodies, US, Sep 2021–Feb 2022. <a href="https://www.cdc.gov/mmwr/volumes/71/wr/mm7117e3.htm" target="_blank" rel="noopener">MMWR</a></li>
-      <li id="s6">CDC NCHS. Long COVID — Household Pulse Survey. <a href="https://www.cdc.gov/nchs/covid19/pulse/long-covid.htm" target="_blank" rel="noopener">cdc.gov/nchs</a></li>
+      <li id="s6">CDC NCHS. Long COVID, Household Pulse Survey. <a href="https://www.cdc.gov/nchs/covid19/pulse/long-covid.htm" target="_blank" rel="noopener">cdc.gov/nchs</a></li>
       <li id="s7">Antonelli M, et al. Risk of long COVID associated with delta versus omicron variants of SARS-CoV-2. <em>Lancet.</em> 2022;399(10343):2263–2264. <a href="https://doi.org/10.1016/S0140-6736(22)00941-2" target="_blank" rel="noopener">doi:10.1016/S0140-6736(22)00941-2</a></li>
     </ol>
   </footer>
@@ -294,10 +293,10 @@ const C={adults:262e6,docCases:103e6,anyFirst:0.1628,chronicFirst:0.1454,selfEve
 const TRAJ={Eliminated:0,Declines:0.6,Flat:1.0,Compounds:1.2};
 const ORDER=["Eliminated","Declines","Flat","Compounds"];
 const TRAJ_INFO={
-  Eliminated:{d:"Only your first infection can cause Long COVID — get through that one without it and later infections add no new risk.",ev:"Optimistic bound. Assumes immunity fully protects; not directly evidenced.",href:null},
-  Declines:{d:"Each reinfection is less likely to cause a new chronic condition than the one before — built-up immunity and milder variants blunt the risk.",ev:"Antonelli et al., Lancet 2022 — Omicron carried roughly half the Long COVID odds of Delta.",href:"#s7"},
-  Flat:{d:"Every infection carries the same risk — each one an independent roll of the dice, no better and no worse than the first.",ev:"Neutral baseline. Assumes no trend in either direction.",href:null},
-  Compounds:{d:"Each reinfection adds more risk than the last — organ damage builds up with every hit.",ev:"Bowe, Xie & Al-Aly, Nature Medicine 2022 — cumulative risk rises with each infection.",href:"#s3"}
+  Eliminated:{d:"Only your first infection can cause Long COVID. Get through that one without it, and later infections add no new risk.",ev:"Optimistic bound. Assumes immunity fully protects; not directly evidenced.",href:null},
+  Declines:{d:"Each reinfection is less likely to cause a new chronic condition than the one before. Built-up immunity and milder variants blunt the risk.",ev:"Antonelli et al., Lancet 2022: Omicron carried roughly half the Long COVID odds of Delta.",href:"#s7"},
+  Flat:{d:"Every infection carries the same risk. Each one is an independent roll of the dice, no better and no worse than the first.",ev:"Neutral baseline. Assumes no trend in either direction.",href:null},
+  Compounds:{d:"Each reinfection adds more risk than the last. Organ damage builds up with every hit.",ev:"Bowe, Xie & Al-Aly, Nature Medicine 2022: cumulative risk rises with each infection.",href:"#s3"}
 };
 const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
 const NMAX=10;
@@ -375,7 +374,6 @@ function render(){
   document.getElementById("hPct").textContent=PCT(r.active);
   document.getElementById("sEver").textContent=M(r.everPeople);
   document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
-  document.getElementById("sInst").textContent=M(r.inst);
   document.getElementById("sFloorSelf").textContent=M(r.selfFloor);
   document.getElementById("trajVal").textContent=S.traj;
   const ti=TRAJ_INFO[S.traj];
@@ -385,7 +383,7 @@ function render(){
   document.getElementById("siVal").textContent=Math.round(S.infShare*100)+"%";
   document.getElementById("adjVal").textContent=S.netAdj.toFixed(2)+"×";
   const yrs=(new Date()-new Date(2020,2,1))/(365.25*864e5);
-  document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs) — you set the total; the yearly rate follows`;
+  document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs). You set the total; the rate follows.`;
   const recog=15e6, everC=r.everPeople, gp=Math.max(0,everC-recog), recFrac=everC>0?Math.min(recog/everC,1):1;
   document.getElementById("gapRec").style.width=(recFrac*100).toFixed(1)+"%";
   document.getElementById("gapUn").style.width=((1-recFrac)*100).toFixed(1)+"%";
@@ -393,7 +391,7 @@ function render(){
   document.getElementById("gapNum").textContent="~"+M(gp);
   document.getElementById("gapPct").textContent=PCT(gp);
   const events=S.avgInf*r.everInf;
-  document.getElementById("pyrClar").innerHTML=`Each band removes a blind spot. The upper bands widen <b>who is counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections — it doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`;
+  document.getElementById("pyrClar").innerHTML=`Each band removes a blind spot. The upper bands widen <b>who gets counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections. It doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`;
   drawChart(r.baseC); drawPyramid(r);
 }
 
