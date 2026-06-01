@@ -112,6 +112,21 @@ svg{display:block;width:100%;height:auto}
 .tk .tkn{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
 .tk .tkt{font-family:var(--display);font-weight:500;font-size:1.1rem;margin-bottom:.45rem;color:var(--clay)}
 .tk .tkb{font-size:.85rem;color:var(--ink);line-height:1.55}
+.tier{margin:0 auto .2rem;color:#fff;font-size:.8rem;font-weight:500;text-align:center;padding:.42rem .6rem;border-radius:3px;
+  display:flex;justify-content:space-between;gap:.6rem;align-items:center;transition:width .3s,transform .12s,filter .12s}
+.tier small{font-family:var(--mono);font-weight:400;opacity:.9;font-size:.74rem}
+.tier.tappable{cursor:pointer}
+.tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
+.tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
+.found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.75rem .85rem;font-size:.82rem;color:var(--muted);text-align:left}
+.found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
+.gapbar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.65rem 0 .4rem;background:var(--line)}
+.gapseg{height:100%;transition:width .3s}
+.gap-rec{background:#6E6857}
+.gap-un{background:#9E3D2B}
+.gapcap{font-size:.76rem;line-height:1.5}
+.gapcap b{color:var(--ink);font-weight:500}
+.gapcap .un{color:var(--clay)}
 .note-block{background:var(--paper2);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.9rem;color:var(--ink)}
 .note-block b{color:var(--clay)}
 footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
@@ -252,11 +267,11 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   </div>
 
   <div class="takeaways">
-    <h3 class="tkh">Three things this makes clear</h3>
+    <h3 class="tkh">Key findings from the Tian et al. study</h3>
     <div class="tkgrid">
-      <div class="tk"><div class="tkn">Is it fading?</div><div class="tkt">No — it's accumulating</div><div class="tkb">Per-infection risk didn't fall as acute illness got milder, and cumulative prevalence kept climbing through 2024. "COVID got mild" doesn't mean Long COVID is receding.</div></div>
-      <div class="tk"><div class="tkn">Are we counting it?</div><div class="tkt">Surveillance sees a fraction</div><div class="tkb">Validated AI phenotyping found more than 2× what diagnostic codes capture. Most chronic post-COVID disease is managed under other labels and never linked to COVID.</div></div>
-      <div class="tk"><div class="tkn">Why it keeps growing</div><div class="tkt">Reinfections compound it</div><div class="tkb">The study counts only first infections, yet the average American has had ~5. The true population burden hinges on an unsettled per-reinfection risk — and is likely larger than first-infection numbers imply.</div></div>
+      <div class="tk"><div class="tkn">Predominantly chronic</div><div class="tkt">Not a passing syndrome</div><div class="tkb">Of everyone who developed Long COVID, 89% had a chronic condition needing ongoing care (14.5% of all infected). The authors frame PASC as a chronic disease burden, not a self-limited illness.</div></div>
+      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Codes miss most of it</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that diagnostic codes capture — the majority are managed under other labels and stay invisible to official tracking.</div></div>
+      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">Accumulating, not fading</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination — the authors describe an accumulating burden rather than a resolving one.</div></div>
     </div>
   </div>
 
