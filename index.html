@@ -132,7 +132,7 @@ svg{display:block;width:100%;height:auto}
 .legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin-top:.5rem}
 .legend i{display:inline-block;width:12px;height:2px;vertical-align:middle;margin-right:.35rem}
 .pyr{margin-top:1.6rem}
-.pyr .hint{font-size:.72rem;color:var(--faint);margin:-.3rem 0 .55rem;font-style:italic}
+.pyr .hint{font-size:.74rem;color:var(--muted);margin:.2rem 0 1rem;line-height:1.5;text-wrap:pretty}
 .pyrclar{font-size:.74rem;color:var(--muted);line-height:1.5;margin:.7rem 0 .1rem;border-top:1px solid var(--line);padding-top:.6rem}
 .pyrclar b{color:var(--clay);font-weight:500}
 .waterline{display:flex;align-items:center;gap:.7rem;margin:1.5rem 0 .9rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
@@ -175,11 +175,30 @@ svg{display:block;width:100%;height:auto}
 .pbar{height:13px;border-radius:3px;transition:width .35s ease;min-width:10px}
 .pbar.subcl{background:rgba(158,61,43,.34)}
 .pbar.subcl.off{background:transparent;min-width:0}
-.pyrhead{display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem 1rem;flex-wrap:wrap;margin:0 0 .55rem}
-.pyrhead h3{margin:0}
-.undetbox{flex-shrink:0;margin-left:auto;text-align:right}
-.undetn{font-family:var(--display);font-weight:600;font-size:1.6rem;line-height:1;color:var(--clay)}
-.undetl{font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:.25rem;max-width:20ch;margin-left:auto;line-height:1.3}
+.pyrhead{display:flex;justify-content:space-between;align-items:center;gap:.7rem 1rem;flex-wrap:wrap;margin:0 0 .55rem}
+.pyrhead h3{margin:0;flex:1 1 200px}
+.undetbox{flex-shrink:0;border:1px solid var(--clay);border-radius:10px;padding:.42rem .8rem;text-align:center;background:var(--panel)}
+.undetn{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1;color:var(--clay)}
+.undetl{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;line-height:1.32}
+.funnelcard{background:var(--paper2);border-radius:14px;padding:1.25rem 1.3rem 1.15rem;margin-top:.2rem}
+.funnel{margin-top:.2rem}
+.frow{margin:0 0 1.25rem;text-align:center}
+.frow:last-child{margin-bottom:0}
+.frow.tappable{cursor:pointer}
+.frow.tappable:hover .fbar{filter:brightness(1.07)}
+.flabel{display:flex;justify-content:center;align-items:baseline;gap:.5rem;margin-bottom:.36rem;flex-wrap:wrap}
+.frole{font-weight:500;font-size:.86rem;color:var(--ink)}
+.frole .arrow{font-family:var(--mono);font-size:.7rem;color:var(--faint);margin-left:.05rem}
+.fnum{font-family:var(--mono);font-weight:500;font-size:.92rem;color:var(--clay);white-space:nowrap;font-variant-numeric:tabular-nums}
+.fbarwrap{line-height:0}
+.fbar{display:inline-block;height:26px;border-radius:5px;transition:width .35s ease;min-width:46px;vertical-align:middle}
+.fbar.sub{background:rgba(158,61,43,.30);border:1px dashed var(--clay);box-sizing:border-box}
+.fbar.sub.off{background:transparent;opacity:.55}
+.fdesc{font-size:.72rem;color:var(--muted);margin-top:.32rem;text-wrap:pretty}
+.fwater{display:flex;align-items:center;gap:.7rem;max-width:320px;margin:1.3rem auto;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.fwater::before,.fwater::after{content:"";flex:1;height:0;border-top:1px dashed var(--line)}
+.fcap{font-size:.78rem;color:var(--muted);line-height:1.5;margin:1.1rem 0 0;border-top:1px solid var(--line);padding-top:.7rem;text-wrap:pretty}
+.fcap b{color:var(--clay);font-weight:500}
 .subdiv{border-top:1px dashed var(--line);margin:1.4rem 0 1.15rem}
 .found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.75rem .85rem;font-size:.82rem;color:var(--muted);text-align:left}
 .found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
@@ -328,18 +347,14 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="pyr">
-        <div class="pyrhead">
-          <h3>The detection pyramid: counted → true burden</h3>
-          <div class="undetbox"><div class="undetn" id="undetN">2.3×</div><div class="undetl">vs. officially coded Long COVID</div></div>
-        </div>
-        <div class="hint">Bars are to scale.</div>
-        <div id="pyramid"></div>
-        <div class="pyrclar" id="pyrClar"></div>
-        <div class="found">
-          <div class="foundlead">Foundation: the recognition gap</div>
-          Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else, and never connect it to COVID.
-          <div class="gapbar"><span class="gapseg gap-rec" id="gapRec" style="width:21%"></span><span class="gapseg gap-un" id="gapUn" style="width:79%"></span></div>
-          <div class="gapcap">The CDC's national survey counts <b>~15M</b> with Long COVID now. This model implies <b id="gapEver">70M</b> ever developed a chronic condition. That leaves a recognition gap of <b class="un" id="gapNum">~55M</b> (<b class="un" id="gapPct">21%</b> of U.S. adults) who developed one and never connected it to COVID.</div>
+        <div class="funnelcard">
+          <div class="pyrhead">
+            <h3>The detection pyramid: counted → true burden</h3>
+            <div class="undetbox"><div class="undetn" id="undetN">2.3×</div><div class="undetl">vs. officially coded<br>Long COVID</div></div>
+          </div>
+          <div class="hint">Every band counts Americans with a new chronic condition from COVID, at a different level of detection. Drawn to scale, narrowest (most strictly counted) at the top.</div>
+          <div class="funnel" id="pyramid"></div>
+          <div class="fcap" id="funCap"></div>
         </div>
       </div>
     </div>
@@ -438,26 +453,26 @@ function drawChart(baseC){
 }
 
 function drawPyramid(r){
-  const tracked=15e6, tian=C.chronicFirst*r.everInf;
-  const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=r.everPeople+subAdd, on=S.subclin>0;
-  const maxV=Math.max(tracked,tian,r.everPeople,subTotal);
-  const W=v=>Math.max(11,v/maxV*88).toFixed(1);
-  const row=(label,val,w,color,o)=>{
+  const coded=15e6, ever=r.everPeople, detected=Math.min(2*coded,ever);
+  const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=ever+subAdd, on=S.subclin>0;
+  const maxV=Math.max(ever,on?subTotal:ever);
+  const W=v=>Math.max(16,v/maxV*100).toFixed(1);
+  const frow=(role,num,w,color,o)=>{
     o=o||{};
     const cite=o.cite?`<a class="fn" href="#s${o.cite}">${o.cite}</a>`:'';
     const arrow=o.ctl?' <span class="arrow">↗</span>':'';
     const tap=o.ctl?` tappable" onclick="focusCtl('${o.ctl}')`:'';
-    const cls='pbar'+(o.sub?' subcl'+(on?'':' off'):'');
+    const barcls='fbar'+(o.sub?' sub'+(o.off?' off':''):'');
     const st=`width:${w}%`+(color?`;background:${color}`:'');
-    return `<div class="prow${tap}"><div class="plabel"><span class="pl">${label}${cite}${arrow}</span><span class="pv">${val}</span></div><div class="ptrack"><div class="${cls}" style="${st}"></div></div></div>`;
+    return `<div class="frow${tap}"><div class="flabel"><span class="frole">${role}${cite}${arrow}</span><span class="fnum">${num}</span></div><div class="fbarwrap"><div class="${barcls}" style="${st}"></div></div><div class="fdesc">${o.desc||''}</div></div>`;
   };
   let h='';
-  h+=row("Officially coded Long COVID (U09.9)",M(tracked),W(tracked),"#8C8676",{cite:6});
-  h+=row("Clinically detected (Tian et al.)",M(tian),W(tian),"#0F6E56",{cite:1});
-  h+=row("Ever developed a chronic condition",M(r.everPeople),W(r.everPeople),"#9E3D2B",{ctl:"ctl-traj"});
-  h+='<div class="waterline">below the waterline</div>';
-  h+= on ? row("+ Subclinical (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin"})
-         : row("+ Subclinical",'off',0,null,{sub:true,ctl:"ctl-subclin"});
+  h+=frow("Officially coded chronic conditions (U09.9)",M(coded),W(coded),"#8C8676",{cite:6,desc:"What medical billing captures"});
+  h+=frow("Clinically detected chronic conditions (Tian et al.)",M(detected),W(detected),"#0F6E56",{cite:1,desc:"About 2× the codes, found on the study's chart review"});
+  h+=frow("Ever-developed chronic conditions (your estimate)",M(ever),W(ever),"#9E3D2B",{ctl:"ctl-traj",desc:"Scaled to all U.S. adults, including those who have recovered"});
+  h+='<div class="fwater">below the waterline</div>';
+  h+= on ? frow("+ Subclinical impacts (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin",desc:"Measurable injury, no diagnosed condition"})
+         : frow("+ Subclinical impacts",'off',W(maxV),null,{sub:true,off:true,ctl:"ctl-subclin",desc:"Speculative; dial it up in the sidebar"});
   document.getElementById("pyramid").innerHTML=h;
 }
 
@@ -500,20 +515,15 @@ function render(){
   document.getElementById("adjVal").textContent=(S.chronRate*100).toFixed(1)+"%";
   const yrs=(new Date()-new Date(2020,2,1))/(365.25*864e5);
   document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs). You set the total; the rate follows.`;
-  const recog=15e6, everC=r.everPeople, gp=Math.max(0,everC-recog), recFrac=everC>0?Math.min(recog/everC,1):1;
-  document.getElementById("gapRec").style.width=(recFrac*100).toFixed(1)+"%";
-  document.getElementById("gapUn").style.width=((1-recFrac)*100).toFixed(1)+"%";
-  document.getElementById("gapEver").textContent=M(everC);
-  document.getElementById("gapNum").textContent="~"+M(gp);
-  document.getElementById("gapPct").textContent=PCT(gp);
+  const gp=Math.max(0,r.everPeople-15e6);
   const ud=r.everPeople/15e6;
   document.getElementById("undetN").textContent=(ud<10?ud.toFixed(1):Math.round(ud))+"×";
+  document.getElementById("funCap").innerHTML=`At today's official count (~<b>15M</b>), that still leaves roughly <b>${M(gp)}</b> (${PCT(gp)} of U.S. adults) who developed a chronic condition and likely never connected it to COVID.`;
   const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=r.everPeople+subAdd;
   document.getElementById("subVal").textContent=S.subclin?S.subclin+"%":"off";
   document.getElementById("subOut").innerHTML=S.subclin
     ? `Adds ≈ <b>${M(subAdd)}</b> with measurable subclinical injury but no diagnosed condition, on top of the <b>${M(r.everPeople)}</b> cumulative chronic. Combined ≈ <b>${M(subTotal)}</b> ever affected. <i>Speculative; not in the headline or chart.</i>`
     : `<i>Off. Dial up to add a speculative subclinical layer on top of the estimate above.</i>`;
-  document.getElementById("pyrClar").innerHTML=`These bars are to scale and shift as you change the assumptions above. Each widens the population: from those <b>officially counted</b>, to what Tian et al. <b>clinically detected</b>, to everyone who <b>ever developed</b> a chronic condition under your assumptions. Below the waterline, subclinical injury (set by the dial) adds people with measurable damage but no diagnosis.`;
   const yrTip="Maps the infection-count axis to calendar years at the average pace (~0.85 infections/yr), so the 5th ≈ 2026";
   const yrLink=S.yearLayer
     ? ` These are now placed on <span class="yrtog" data-yeartoggle title="${yrTip}">calendar years</span>; click to switch back.`
