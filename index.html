@@ -87,6 +87,8 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .chartcap .cl,.seg-traj button[data-h]{cursor:pointer}
 .chartcap .cl{color:var(--clay);border-bottom:1px dotted var(--clay);font-weight:500}
 .chartcap .cl:hover{background:rgba(158,61,43,.08)}
+.chartcap .yrtog{color:var(--clay);font-weight:500;cursor:pointer;padding:0 .16em;border-radius:3px;background:linear-gradient(rgba(176,116,26,.30),rgba(176,116,26,.30));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.chartcap .yrtog:hover{background:linear-gradient(rgba(176,116,26,.52),rgba(176,116,26,.52));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
@@ -348,8 +350,6 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
   </div>
 
-  <div class="takeaways" hidden></div>
-
   <footer>
     <strong>Sources.</strong> Click any <a class="fn" href="#s1" title="example">n</a> above to jump here; each links out.
     <ol>
@@ -408,7 +408,7 @@ function drawChart(baseC){
   for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle">${k}</text>`;
   g+=`<text x="${(x0+x1)/2}" y="230" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" letter-spacing=".4">Number of infections (per person)</text>`;
   const ymid=(y0+y1)/2;
-  g+=`<text x="12" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 12 ${ymid})">Chronic condition</text>`;
+  g+=`<text x="12" y="${ymid}" font-size="10" font-family="IBM Plex Mono" font-weight="500" fill="#9E3D2B" text-anchor="middle" transform="rotate(-90 12 ${ymid})">Chronic condition</text>`;
   g+=`<text x="24" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 24 ${ymid})">cumulative chance (%)</text>`;
   if(S.yearLayer){
     for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B0741A':'#6E6857'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
@@ -516,8 +516,8 @@ function render(){
   document.getElementById("pyrClar").innerHTML=`These bars are to scale and shift as you change the assumptions above. Each widens the population: from those <b>officially counted</b>, to what Tian et al. <b>clinically detected</b>, to everyone who <b>ever developed</b> a chronic condition under your assumptions. Below the waterline, subclinical injury (set by the dial) adds people with measurable damage but no diagnosis.`;
   const yrTip="Maps the infection-count axis to calendar years at the average pace (~0.85 infections/yr), so the 5th ≈ 2026";
   const yrLink=S.yearLayer
-    ? ` These are now placed on <span class="cl" data-yeartoggle title="${yrTip}">calendar years</span>; click to switch back.`
-    : ` You can also project the average infection rate across <span class="cl" data-yeartoggle title="${yrTip}">calendar years</span>.`;
+    ? ` These are now placed on <span class="yrtog" data-yeartoggle title="${yrTip}">calendar years</span>; click to switch back.`
+    : ` You can also project the average infection rate across <span class="yrtog" data-yeartoggle title="${yrTip}">calendar years</span>.`;
   document.getElementById("chartCap").innerHTML=(on
     ? `Each curve projects the cumulative chance of a <em>new</em> chronic condition as infections repeat. Your <b>${S.traj}</b> path is <span class="cl" data-h="clay">in clay</span> and the dot marks your settings (<b>${PCT(r.everPeople)}</b> ever affected). Hover <span class="cl" data-h="Declines">declines</span>, <span class="cl" data-h="Flat">flat</span>, <span class="cl" data-h="Compounds">compounds</span>, or the <span class="cl" data-h="all">other curves</span> to compare.`
     : `The <span class="cl" data-h="clay">straight clay line</span> is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The <span class="cl" data-h="all">other curves</span> project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`)+yrLink;
