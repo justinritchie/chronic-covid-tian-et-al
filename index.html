@@ -124,7 +124,7 @@ input[type=range]:focus-visible,.seg button:focus-visible,.ytoggle input:focus-v
 .stat.ghost{border-top-color:var(--line)} .stat.ghost .n{color:var(--muted)}
 .chartwrap{margin-top:1.5rem;border-top:1px solid var(--line);padding-top:1.1rem}
 .chartwrap h3,.pyr h3{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .7rem}
-.charth{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1rem;flex-wrap:wrap}
+.chartwrap h3.charth{display:block;font-family:var(--display);font-size:1.32rem;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink);line-height:1.1;margin:0 0 .9rem}
 .ytoggle{font-family:var(--body);text-transform:none;letter-spacing:0;font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:.35rem;cursor:pointer}
 .ytoggle input{accent-color:var(--clay);cursor:pointer;width:14px;height:14px}
 .yearcap{font-size:.74rem;color:var(--faint);margin-top:.55rem;font-style:italic}
@@ -177,7 +177,7 @@ svg{display:block;width:100%;height:auto}
 .pbar.subcl.off{background:transparent;min-width:0}
 .pyrhead{display:flex;justify-content:space-between;align-items:center;gap:.7rem 1rem;flex-wrap:wrap;margin:0 0 .55rem}
 .pyrhead h3{margin:0;flex:1 1 230px;font-family:var(--display);font-size:1.32rem;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink);line-height:1.1}
-.pyrhead h3 .pyrsub{display:block;font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+.pyrhead h3 .pyrsub,.charth .pyrsub{display:block;font-family:var(--mono);font-size:.6rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
 .undetbox{flex-shrink:0;border:1px solid var(--clay);border-radius:10px;padding:.42rem .8rem;text-align:center;background:var(--panel)}
 .undetn{font-family:var(--display);font-weight:600;font-size:1.5rem;line-height:1;color:var(--clay)}
 .undetl{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;line-height:1.32}
@@ -331,12 +331,12 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
       <div class="subs">
         <div class="stat"><div class="n"><span id="sEver">34M</span><span class="pct" id="sEverPct">13% of adults</span></div><div class="l">Ever developed a new chronic condition, including those who have since recovered</div></div>
-        <div class="stat ghost"><div class="n">43M</div><div class="l">Ever self-reported having had Long COVID in the CDC's national survey, ~30% of adults who had COVID<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, Aug–Sep 2024: 29.8% of adults who had COVID; ~43M, ~17% of all adults">6</a>. Many never link their symptoms to COVID, so even this undercounts.</div></div>
+        <div class="stat ghost"><div class="n">43M</div><div class="l">Ever self-reported having had Long COVID in the CDC's national survey, ~30% of adults who had COVID<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, Aug–Sep 2024: 29.8% of adults who had COVID; ~43M, ~17% of all adults">6</a>. Many never realized their symptoms resulted from COVID, so even this undercounts.</div></div>
         <div class="stat ghost"><div class="n">15M</div><div class="l">Report Long COVID right now in the CDC's ongoing national survey<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, ~5–7% of adults currently">6</a>. Medical billing codes capture even fewer<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>.</div></div>
       </div>
 
       <div class="chartwrap">
-        <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span></h3>
+        <h3 class="charth">The reinfection curve<span class="pyrsub">cumulative chronic risk vs. number of infections</span></h3>
         <div class="chartcap" id="chartCap"></div>
         <svg id="chart" viewBox="0 0 520 238" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
@@ -519,7 +519,7 @@ function render(){
   const gp=Math.max(0,r.everPeople-15e6);
   const ud=r.everPeople/15e6;
   document.getElementById("undetN").textContent=(ud<10?ud.toFixed(1):Math.round(ud))+"×";
-  document.getElementById("funCap").innerHTML=`At today's official count (~<b>15M</b>), that still leaves roughly <b>${M(gp)}</b> (${PCT(gp)} of U.S. adults) who developed a chronic condition and likely never connected it to COVID.`;
+  document.getElementById("funCap").innerHTML=`At today's official count (~<b>15M</b>), that still leaves roughly <b>${M(gp)}</b> (${PCT(gp)} of U.S. adults) who developed a chronic condition and likely never realized it resulted from COVID.`;
   const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=r.everPeople+subAdd;
   document.getElementById("subVal").textContent=S.subclin?S.subclin+"%":"off";
   document.getElementById("subOut").innerHTML=S.subclin
