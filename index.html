@@ -24,8 +24,8 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem)
 h1 em{font-style:italic;color:var(--clay)}
 .dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 1.4rem}
 .rule{height:2px;background:var(--ink);width:54px;margin:0 0 2rem}
-h1,.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
-.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.trajinfo,.note-block{text-wrap:pretty}
+.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
+h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.trajinfo,.note-block{text-wrap:pretty}
 .fn{font-family:var(--mono);font-size:.6em;color:var(--teal);text-decoration:none;font-weight:500;vertical-align:super;
   padding:0 .12em;border-bottom:1px dotted var(--teal);white-space:nowrap}
 .fn:hover{color:var(--clay);border-color:var(--clay)}
@@ -73,11 +73,13 @@ h1,.takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
 .ctl .derived b{color:var(--teal);font-weight:500}
 .ctl.off{opacity:.5}
 .ctl.off input[type=range]{cursor:not-allowed}
+.ctl.traj-off{background:rgba(110,104,87,.06)}
+.ctl.traj-off > label,.ctl.traj-off .note,.ctl.traj-off .trajinfo{opacity:.6}
 .offhint{font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic}
 .raterow{margin:.8rem 0 .2rem;padding:.65rem .8rem;background:var(--paper2);border-radius:10px}
 .raterow .ratelab{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.82rem;font-weight:500;margin-bottom:.1rem}
 .raterow .rateval{font-family:var(--mono);color:var(--clay);font-size:.82rem;white-space:nowrap}
-.chartcap{font-size:.78rem;color:var(--muted);line-height:1.5;margin-top:.65rem;text-wrap:pretty}
+.chartcap{font-size:.78rem;color:var(--muted);line-height:1.5;margin:.15rem 0 .9rem;text-wrap:pretty}
 .chartcap b{color:var(--ink);font-weight:500}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
@@ -160,8 +162,8 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 <body>
 <div class="wrap">
   <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
-  <h1>How many Americans live with a <em>chronic</em> condition developed after a COVID infection?</h1>
-  <p class="dek">A 2026 study across 58 hospitals found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. So how big is the true number? Start from what the study measured, then set the assumptions you find plausible and watch the estimate move.</p>
+  <h1>How many live with a <em>chronic</em> condition developed from a COVID infection?</h1>
+  <p class="dek">A 2026 study across 58 US hospitals found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. So how big is the true number? Start from what the study measured, then set the assumptions you find plausible and watch the estimate move.</p>
   <div class="rule"></div>
 
   <div class="hero">
@@ -262,13 +264,13 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <div class="chartwrap">
         <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span>
           <label class="ytoggle"><input type="checkbox" id="yearTog"> Year overlay</label></h3>
+        <div class="chartcap" id="chartCap"></div>
         <svg id="chart" viewBox="0 0 520 230" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
           <span><i style="background:#9E3D2B"></i>your scenario</span>
           <span><i style="background:#B0741A"></i>other trajectories</span>
           <span><i style="background:#0F6E56"></i>your infection count</span>
         </div>
-        <div class="chartcap" id="chartCap"></div>
         <div class="yearcap" id="yearCap" style="display:none">Top axis = the calendar year each infection lands in if the observed pace holds (~0.85/yr, anchored so the 5th ≈ 2026). Shaded = future projection.</div>
       </div>
 
@@ -429,6 +431,7 @@ function render(){
   } else { rateRow.hidden=true; }
   const infCtl=document.getElementById("ctl-inf"), infEl=document.getElementById("avgInf");
   infCtl.classList.toggle("off",!on); infEl.disabled=!on;
+  document.getElementById("ctl-traj").classList.toggle("traj-off",!on);
   document.getElementById("infNote").hidden=!on;
   document.getElementById("infOff").hidden=on;
   document.getElementById("infRate").style.display=on?"":"none";
