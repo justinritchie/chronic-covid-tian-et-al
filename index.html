@@ -22,8 +22,11 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);l
 .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin:0 0 .8rem}
 h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.02;letter-spacing:-.01em;margin:.1rem 0 .7rem}
 h1 em{font-style:italic;color:var(--clay)}
-.dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 1.4rem}
-.rule{height:2px;background:var(--ink);width:54px;margin:0 0 2rem}
+.dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 .9rem}
+.dek.lead{color:var(--ink);font-weight:500}
+.hl{background:linear-gradient(transparent 58%, rgba(176,116,26,.30) 58%);padding:0 .06em;font-weight:500;color:var(--ink)}
+.sechead{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--ink);letter-spacing:-.01em;margin:0 0 .9rem}
+.rule{height:2px;background:var(--ink);width:54px;margin:0 0 1.6rem}
 .takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
 h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.trajinfo,.note-block{text-wrap:pretty}
 .fn{font-family:var(--mono);font-size:.6em;color:var(--teal);text-decoration:none;font-weight:500;vertical-align:super;
@@ -163,35 +166,40 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 <div class="wrap">
   <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
   <h1>How many live with a <em>chronic</em> condition developed from a COVID infection?</h1>
-  <p class="dek">A 2026 study across 58 US hospitals found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. So how big is the true number? Start from what the study measured, then set the assumptions you find plausible and watch the estimate move.</p>
+  <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. The study was conservative by design, given the gaps in the data.</p>
+  <p class="dek lead">So how many Americans actually have a chronic condition from COVID? Start from what the study measured, set the assumptions you find plausible, and get your estimate.</p>
   <div class="rule"></div>
 
+  <p class="sechead">What Tian et al. found</p>
   <div class="hero">
     <div>
-      <div class="lab">Measured · per infection · no extrapolation</div>
+      <div class="lab">Measured · per infection</div>
       <div class="big">1 in 6</div>
-      <div class="sub">of people with a documented COVID infection developed a new, lasting condition needing medical care (16.3%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>).</div>
+      <div class="sub">of people with a documented COVID infection <b>developed a new, lasting condition</b> needing medical care (16.3%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>).</div>
     </div>
     <div class="div"></div>
     <div>
       <div class="lab">…of which chronic</div>
       <div class="big">1 in 7</div>
-      <div class="sub">developed a new <b>chronic</b> condition requiring ongoing care (14.5%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>).</div>
+      <div class="sub"><b>developed a new chronic condition</b> requiring ongoing care (14.5%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>).</div>
     </div>
   </div>
 
   <div class="about">
-    <div class="ab"><div class="abk">The study</div><div class="abv">A retrospective study of <b class="num">457,950</b> adults with a documented COVID infection, across <b class="num">58</b> US hospitals in <b class="num">4</b> regions, <b class="num">2020–2024</b>.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
-    <div class="ab"><div class="abk">What it found</div><div class="abv"><b class="num">1 in 6</b> developed Long COVID, <b class="num">1 in 7</b> a chronic condition needing ongoing care. That is over <b class="num">2×</b> what diagnostic codes capture, and the share kept rising through <b class="num">2024</b>.</div></div>
-    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions appearing <b class="num">3+ months</b> after infection, persisting <b class="num">2+ months</b>, not explained by prior illness. A clinician then classified each by chronicity. <b class="num">89%</b> were chronic.</div></div>
+    <div class="ab"><div class="abk">The cohort</div><div class="abv"><b class="num">457,950</b> adults with a documented COVID infection, across <b class="num">58</b> US hospitals in <b class="num">4</b> regions, <b class="num">2020–2024</b>.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
+    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm (P2RC) flagged new conditions appearing <b class="num">3+ months</b> after infection, persisting <b class="num">2+ months</b>, not explained by prior illness. A clinician then classified each by chronicity.</div></div>
+    <div class="ab"><div class="abk">Predominantly chronic</div><div class="abv"><b class="num">89%</b> of Long COVID cases were chronic. The authors frame PASC as a chronic disease burden, not a passing illness.</div></div>
+    <div class="ab"><div class="abk">A surveillance gap</div><div class="abv">The algorithm found over <b class="num">2×</b> the cases diagnostic codes capture. Most are managed under other labels, invisible to official tracking.</div></div>
+    <div class="ab"><div class="abk">Still climbing</div><div class="abv">Cumulative prevalence kept rising through <b class="num">mid-2024</b>, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
+    <div class="ab"><div class="abk">Why this is conservative</div><div class="abv">It counts only documented infections, only each patient's first, and excludes conditions explainable by prior illness. Patients who never sought care are invisible, so the true burden is almost certainly higher.</div></div>
   </div>
 
   <div class="cite">Tian J, Azhir A, Decaro M, Chau N, Hügel J, Morris M, Cheng J, Fard P, Bassett IV, Bell DS, Bernstam EV, Visweswaran S, Klann JG, Murphy SN, Estiri H. <span class="srct">Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals.</span> <em>JAMA Network Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></div>
 
   <div class="phasediv">
-    <span class="ph ph-a">What the study measured</span>
-    <span class="ph-arrow">now project it across everyone infected ↓</span>
-    <span class="ph ph-b">Your modeled estimate</span>
+    <span class="ph ph-a">Measured</span>
+    <span class="ph-arrow">now estimate it across all Americans ↓</span>
+    <span class="ph ph-b">Your estimate</span>
   </div>
 
   <div class="grid">
@@ -246,7 +254,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     <div class="panel">
       <div class="out-head">
         <div>
-          <div class="headline-lab">Currently living with a chronic post-COVID condition</div>
+          <div class="headline-lab">Americans currently living with a chronic post-COVID condition</div>
           <div class="headline"><span id="hActive">63</span><span class="u">M</span></div>
         </div>
         <div class="pctbox">
@@ -256,8 +264,8 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       </div>
 
       <div class="subs">
-        <div class="stat"><div class="n"><span id="sEver">70M</span><span class="pct" id="sEverPct">27% of adults</span></div><div class="l">Ever developed one (accumulating; only goes up)</div></div>
-        <div class="stat ghost"><div class="n" id="sFloorSelf">71M</div><div class="l">Self-report "ever had Long COVID." A lower bound, since many never connect their symptoms to COVID<a class="fn" href="#s6" title="Census Household Pulse Survey">6</a></div></div>
+        <div class="stat"><div class="n"><span id="sEver">34M</span><span class="pct" id="sEverPct">13% of adults</span></div><div class="l">Ever developed a new chronic condition, including those who have since recovered</div></div>
+        <div class="stat ghost"><div class="n">43M</div><div class="l">Ever self-reported having had Long COVID in the CDC's national survey, ~30% of adults who had COVID<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, Aug–Sep 2024: 29.8% of adults who had COVID; ~43M, ~17% of all adults">6</a>. Many never link their symptoms to COVID, so even this undercounts.</div></div>
         <div class="stat ghost"><div class="n">15M</div><div class="l">Report Long COVID right now in the CDC's ongoing national survey<a class="fn" href="#s6" title="CDC/Census Household Pulse Survey, ~5–7% of adults currently">6</a>. Medical billing codes capture even fewer<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>.</div></div>
       </div>
 
@@ -292,15 +300,6 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   <div class="note-block">
     <b>How to read this.</b> The headline rate (top) is what Tian et al. <em>measured</em>. Everything below it depends on assumptions the data can't settle, so you set them and the estimate updates. The study can't tell how many cases resolved,<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so it counts people <b>ever</b> affected, not those active today; the persistence slider bridges that gap.
     <div class="disc">Figures are modeled estimates with wide uncertainty, not point facts. No never-infected comparison group, so these are not "excess over background." For exploration and discussion.</div>
-  </div>
-
-  <div class="takeaways">
-    <h3 class="tkh">Key findings from the Tian et al. study</h3>
-    <div class="tkgrid">
-      <div class="tk"><div class="tkn">Predominantly chronic</div><div class="tkt">COVID infections are associated with developing a chronic condition</div><div class="tkb">Of everyone who developed Long COVID, 89% had a chronic condition needing ongoing care (14.5% of all infected). The authors frame PASC as a chronic disease burden, not a self-limited illness.</div></div>
-      <div class="tk"><div class="tkn">A surveillance gap</div><div class="tkt">Diagnostic codes created for Long COVID miss most cases</div><div class="tkb">The AI phenotyping (P2RC) identified more than 2× the cases that standard diagnostic codes capture. The majority are managed under other labels, invisible to official tracking.</div></div>
-      <div class="tk"><div class="tkn">Still climbing</div><div class="tkt">The burden of chronic conditions tied to Long COVID keeps rising</div><div class="tkb">Cumulative prevalence kept rising through mid-2024, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
-    </div>
   </div>
 
   <footer>
@@ -413,7 +412,6 @@ function render(){
   document.getElementById("hPct").textContent=PCT(r.active);
   document.getElementById("sEver").textContent=M(r.everPeople);
   document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
-  document.getElementById("sFloorSelf").textContent=M(r.selfFloor);
   document.getElementById("trajVal").textContent=on?S.traj:"Off";
   document.querySelectorAll("#traj button").forEach(x=>x.classList.toggle("on",x.dataset.t===S.traj));
   if(on){const ti=TRAJ_INFO[S.traj];
