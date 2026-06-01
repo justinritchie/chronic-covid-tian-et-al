@@ -133,6 +133,16 @@ svg{display:block;width:100%;height:auto}
 .pyr .hint{font-size:.72rem;color:var(--faint);margin:-.3rem 0 .55rem;font-style:italic}
 .pyrclar{font-size:.74rem;color:var(--muted);line-height:1.5;margin:.7rem 0 .1rem;border-top:1px solid var(--line);padding-top:.6rem}
 .pyrclar b{color:var(--clay);font-weight:500}
+.waterline{display:flex;align-items:center;gap:.7rem;margin:1.5rem 0 .9rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.waterline::before,.waterline::after{content:"";flex:1;height:0;border-top:1px dashed var(--line)}
+.subclin{background:var(--paper2);border-radius:12px;padding:1rem 1.1rem}
+.subclin .sh{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.4rem}
+.subclin .sd{font-size:.82rem;color:var(--muted);line-height:1.5;margin-bottom:.8rem;text-wrap:pretty}
+.subclin > label{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-weight:500;font-size:.9rem;margin-bottom:.1rem}
+.subclin .sv{font-family:var(--mono);color:var(--clay);font-size:.88rem;white-space:nowrap}
+.subclin .sout{font-size:.84rem;color:var(--ink);line-height:1.5;margin-top:.6rem;padding-left:.6rem;border-left:2px solid var(--faint);font-variant-numeric:tabular-nums}
+.subclin .sout b{color:var(--clay);font-weight:500}
+.subclin .sout i{color:var(--muted)}
 .takeaways{margin-top:2.2rem}
 .takeaways .tkh{font-family:var(--display);font-weight:500;font-size:1.3rem;margin:0 0 1rem}
 .tkgrid{display:grid;grid-template-columns:1fr;gap:1rem}
@@ -147,6 +157,28 @@ svg{display:block;width:100%;height:auto}
 .tier.tappable{cursor:pointer}
 .tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
 .tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
+.tier.subcl{background:rgba(158,61,43,.28);color:var(--clay);border:1px dashed var(--clay)}
+.tier.subcl small{opacity:1}
+.tier.subcl.off{background:transparent;color:var(--faint);border-color:var(--line)}
+.tier .pcite{color:#fff;border-bottom-color:rgba(255,255,255,.55)}
+.tier .pcite:hover{color:#fff;border-bottom-color:#fff}
+.prow{margin:0 0 .85rem}
+.prow.tappable{cursor:pointer}
+.prow.tappable:hover .pbar{filter:brightness(1.08)}
+.plabel{display:flex;justify-content:space-between;align-items:baseline;gap:.7rem;font-size:.82rem;color:var(--ink);line-height:1.3;margin-bottom:.28rem}
+.plabel .pl{font-weight:500}
+.plabel .arrow{font-family:var(--mono);font-size:.7rem;color:var(--faint)}
+.plabel .pv{font-family:var(--mono);font-weight:500;color:var(--clay);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ptrack{border:1px dotted var(--line);border-radius:6px;padding:3px}
+.pbar{height:13px;border-radius:3px;transition:width .35s ease;min-width:10px}
+.pbar.subcl{background:rgba(158,61,43,.34)}
+.pbar.subcl.off{background:transparent;min-width:0}
+.pyrhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin:0 0 .55rem}
+.pyrhead h3{margin:0}
+.undetbox{text-align:right;flex-shrink:0;line-height:1}
+.undetn{font-family:var(--display);font-weight:600;font-size:1.6rem;color:var(--clay)}
+.undetl{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.25rem;max-width:15ch;margin-left:auto;line-height:1.35}
+.subdiv{border-top:1px dashed var(--line);margin:1.4rem 0 1.15rem}
 .found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.75rem .85rem;font-size:.82rem;color:var(--muted);text-align:left}
 .found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
 .gapbar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.65rem 0 .4rem;background:var(--line)}
@@ -167,10 +199,11 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 </head>
 <body>
 <div class="wrap">
-  <p class="kicker">A transparent model · Tian et al., JAMA Network Open 2026</p>
+  <p class="kicker">Building on the findings of Tian et al., JAMA Network Open 2026</p>
   <h1>How many live with a <em>chronic</em> condition developed from a COVID infection?</h1>
   <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. The study was conservative by design, given the gaps in the data.</p>
-  <p class="dek lead">So how many Americans actually have a chronic condition from COVID? Start from what the study measured, set the assumptions you find plausible, and get your estimate.</p>
+  <p class="dek lead">So how many Americans actually have a chronic condition from COVID?</p>
+  <p class="dek">Start from what the study measured, set the assumptions you find plausible, and get your estimate.</p>
   <div class="rule"></div>
 
   <p class="sechead">What Tian et al. found</p>
@@ -251,6 +284,14 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <div class="note">Tian et al. measured 14.5% per documented infection. Raise it if missed or untested infections hide real cases; lower it if undocumented infections were milder.</div>
         <input type="range" id="chronRate" min="0.10" max="0.19" step="0.005" value="0.145">
       </div>
+
+      <div class="subdiv"></div>
+      <div class="ctl" id="ctl-subclin">
+        <label>Subclinical impacts <span class="val" id="subVal">off</span></label>
+        <div class="note">Measurable injury beyond any diagnosis: brain, heart, and vascular changes found in people with no symptoms.<a class="fn" href="#s8" title="UK Biobank brain imaging; C-MORE multi-organ MRI">8</a> Speculative, so it stays out of the headline and chart; it shows as the dashed bar in the pyramid.</div>
+        <input type="range" id="subclin" min="0" max="60" step="5" value="0">
+        <div class="derived" id="subOut"></div>
+      </div>
     </div>
 
     <!-- OUTPUTS -->
@@ -274,7 +315,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 
       <div class="chartwrap">
         <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span>
-          <label class="ytoggle"><input type="checkbox" id="yearTog"> Year overlay</label></h3>
+          <label class="ytoggle" title="Maps the infection-count axis to calendar years using the average pace (~0.85 infections/yr), so the 5th ≈ 2026"><input type="checkbox" id="yearTog"> Show as calendar years</label></h3>
         <div class="chartcap" id="chartCap"></div>
         <svg id="chart" viewBox="0 0 520 238" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
@@ -282,12 +323,15 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
           <span><i style="background:#B0741A"></i>other trajectories</span>
           <span><i style="background:#0F6E56"></i>your infection count</span>
         </div>
-        <div class="yearcap" id="yearCap" style="display:none">Top axis = the calendar year each infection lands in if the observed pace holds (~0.85/yr, anchored so the 5th ≈ 2026). Shaded = future projection.</div>
+        <div class="yearcap" id="yearCap" style="display:none">Each infection is placed in the calendar year it would land in at the average pace (~0.85 infections/yr, so the 5th ≈ 2026). Shaded = future.</div>
       </div>
 
       <div class="pyr">
-        <h3>The conservatism pyramid: counted → true burden</h3>
-        <div class="hint">Tap any amber or red layer to jump to the assumption behind it.</div>
+        <div class="pyrhead">
+          <h3>The conservatism pyramid: counted → true burden</h3>
+          <div class="undetbox"><div class="undetn" id="undetN">2.3×</div><div class="undetl">vs. officially coded Long COVID</div></div>
+        </div>
+        <div class="hint">Bars are to scale. Tap one to jump to the assumption that drives it.</div>
         <div id="pyramid"></div>
         <div class="pyrclar" id="pyrClar"></div>
         <div class="found">
@@ -315,6 +359,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <li id="s5">CDC. <span class="srct">Seroprevalence of Infection-Induced SARS-CoV-2 Antibodies, US, Sep 2021–Feb 2022.</span> <a href="https://www.cdc.gov/mmwr/volumes/71/wr/mm7117e3.htm" target="_blank" rel="noopener">MMWR</a></li>
       <li id="s6">CDC NCHS. <span class="srct">Long COVID, Household Pulse Survey.</span> <a href="https://www.cdc.gov/nchs/covid19/pulse/long-covid.htm" target="_blank" rel="noopener">cdc.gov/nchs</a></li>
       <li id="s7">Antonelli M, et al. <span class="srct">Risk of long COVID associated with delta versus omicron variants of SARS-CoV-2.</span> <em>Lancet.</em> 2022;399(10343):2263–2264. <a href="https://doi.org/10.1016/S0140-6736(22)00941-2" target="_blank" rel="noopener">doi:10.1016/S0140-6736(22)00941-2</a></li>
+      <li id="s8">Douaud G, et al. <span class="srct">SARS-CoV-2 is associated with changes in brain structure in UK Biobank.</span> <em>Nature.</em> 2022. <a href="https://www.medrxiv.org/content/10.1101/2021.06.11.21258690" target="_blank" rel="noopener">study</a>. Raman B, et al. <span class="srct">C-MORE multi-organ MRI of COVID-19 survivors.</span> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8586081/" target="_blank" rel="noopener">PMC</a></li>
     </ol>
   </footer>
 </div>
@@ -330,7 +375,7 @@ const TRAJ_INFO={
 const TRAJ_OFF="Reinfection isn't modeled, matching Tian et al., who counted only each patient's first infection. Pick a trajectory above to project what repeat infections would add.";
 const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
 const NMAX=10;
-const DEFAULTS={traj:null,avgInf:5,persist:0.90,infShare:0.90,chronRate:0.145,declRate:0.6,compRate:1.2};
+const DEFAULTS={traj:null,avgInf:5,persist:0.90,infShare:0.90,chronRate:0.145,declRate:0.6,compRate:1.2,subclin:0};
 let S=Object.assign({yearLayer:false,hover:null},DEFAULTS);
 const factorOf=t=>t==="Declines"?S.declRate:t==="Compounds"?S.compRate:t==="Flat"?1:0;
 
@@ -369,7 +414,7 @@ function drawChart(baseC){
   }
   ORDER.forEach(t=>{
     if(t===S.traj) return;
-    const hov=t===S.hover;
+    const hov=t===S.hover||S.hover==="all";
     let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,factorOf(t),k))}`);
     g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.other}" stroke-width="${hov?2.6:1.2}" stroke-opacity="${hov?1:.4}"/>`;
   });
@@ -378,32 +423,39 @@ function drawChart(baseC){
     let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,f,k))}`);
     g+=`<polygon points="${pts.join(" ")} ${X(NMAX)},${y1} ${X(1)},${y1}" fill="url(#selFill)" stroke="none"/>`;
     g+=`<line x1="${X(S.avgInf)}" y1="${y0}" x2="${X(S.avgInf)}" y2="${y1}" stroke="${COL.mark}" stroke-width="1.5" stroke-dasharray="3 3"/>`;
-    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.sel}" stroke-width="2.6"/>`;
+    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.sel}" stroke-width="${S.hover==="clay"?3.8:2.6}"/>`;
     const ry=Y(cumRisk(baseC,f,S.avgInf));g+=`<circle cx="${X(S.avgInf)}" cy="${ry}" r="4.5" fill="${COL.sel}"/>`;
   } else {
     const yb=Y(baseC);
     g+=`<polygon points="${X(1)},${yb} ${X(NMAX)},${yb} ${X(NMAX)},${y1} ${X(1)},${y1}" fill="url(#selFill)" stroke="none"/>`;
-    g+=`<line x1="${X(1)}" y1="${yb}" x2="${X(NMAX)}" y2="${yb}" stroke="${COL.sel}" stroke-width="2.6"/>`;
+    g+=`<line x1="${X(1)}" y1="${yb}" x2="${X(NMAX)}" y2="${yb}" stroke="${COL.sel}" stroke-width="${S.hover==="clay"?3.8:2.6}"/>`;
     g+=`<circle cx="${X(1)}" cy="${yb}" r="4.5" fill="${COL.sel}"/>`;
   }
   document.getElementById("chart").innerHTML=g;
 }
 
 function drawPyramid(r){
-  const tiers=[
-    {l:"Officially coded (U09.9)",v:"<7%",w:38,c:"#6E6857",ctl:null},
-    {l:"Clinically detected (Tian et al.)",v:"14.5%/inf",w:50,c:"#0F6E56",ctl:null},
-    {l:"+ Everyone ever infected",v:"~"+M(r.everInf),w:62,c:"#0F6E56",ctl:"ctl-share"},
-    {l:"+ Care never sought",v:"slider",w:74,c:"#B0741A",ctl:"ctl-adj"},
-    {l:"+ Pre-existing worsened",v:"slider",w:84,c:"#B0741A",ctl:"ctl-adj"},
-    {l:"+ Reinfections"+(S.traj?" (×"+S.avgInf+")":" (off)"),v:S.traj?"slider":"—",w:94,c:"#B0741A",ctl:"ctl-traj"},
-    {l:"Currently active chronic",v:M(r.active),w:100,c:"#9E3D2B",ctl:"ctl-persist"}
-  ];
-  document.getElementById("pyramid").innerHTML=tiers.map(t=>{
-    const tap=t.ctl?` tappable" onclick="focusCtl('${t.ctl}')" title="Adjust the assumption behind this layer`:"";
-    const arrow=t.ctl?'<span class="arrow">↗</span>':'';
-    return `<div class="tier${tap}" style="width:${t.w}%;background:${t.c}"><span>${t.l}</span><small>${t.v}${arrow}</small></div>`;
-  }).join("");
+  const tracked=15e6, tian=C.chronicFirst*r.everInf;
+  const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=r.everPeople+subAdd, on=S.subclin>0;
+  const maxV=Math.max(tracked,tian,r.everPeople,subTotal);
+  const W=v=>Math.max(11,v/maxV*88).toFixed(1);
+  const row=(label,val,w,color,o)=>{
+    o=o||{};
+    const cite=o.cite?`<a class="fn" href="#s${o.cite}">${o.cite}</a>`:'';
+    const arrow=o.ctl?' <span class="arrow">↗</span>':'';
+    const tap=o.ctl?` tappable" onclick="focusCtl('${o.ctl}')`:'';
+    const cls='pbar'+(o.sub?' subcl'+(on?'':' off'):'');
+    const st=`width:${w}%`+(color?`;background:${color}`:'');
+    return `<div class="prow${tap}"><div class="plabel"><span class="pl">${label}${cite}${arrow}</span><span class="pv">${val}</span></div><div class="ptrack"><div class="${cls}" style="${st}"></div></div></div>`;
+  };
+  let h='';
+  h+=row("Officially coded Long COVID (U09.9)",M(tracked),W(tracked),"#8C8676",{cite:6});
+  h+=row("Clinically detected (Tian et al.)",M(tian),W(tian),"#0F6E56",{cite:1});
+  h+=row("Ever developed a chronic condition",M(r.everPeople),W(r.everPeople),"#9E3D2B",{ctl:"ctl-traj"});
+  h+='<div class="waterline">below the waterline</div>';
+  h+= on ? row("+ Subclinical (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin"})
+         : row("+ Subclinical",'off',0,null,{sub:true,ctl:"ctl-subclin"});
+  document.getElementById("pyramid").innerHTML=h;
 }
 
 function focusCtl(id){
@@ -451,13 +503,17 @@ function render(){
   document.getElementById("gapEver").textContent=M(everC);
   document.getElementById("gapNum").textContent="~"+M(gp);
   document.getElementById("gapPct").textContent=PCT(gp);
-  const effInf=on?S.avgInf:1, events=effInf*r.everInf;
-  document.getElementById("pyrClar").innerHTML=on
-    ? `Each band removes a blind spot. The upper bands widen <b>who gets counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections. It doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`
-    : `Each band widens <b>who gets counted</b> (codes → clinical detection → everyone infected). Reinfection modeling is off, so each person is counted with a single infection, the Tian et al. baseline.`;
+  const ud=r.everPeople/15e6;
+  document.getElementById("undetN").textContent=(ud<10?ud.toFixed(1):Math.round(ud))+"×";
+  const subAdd=(S.subclin/100)*Math.max(0,r.everInf-r.everPeople), subTotal=r.everPeople+subAdd;
+  document.getElementById("subVal").textContent=S.subclin?S.subclin+"%":"off";
+  document.getElementById("subOut").innerHTML=S.subclin
+    ? `Adds ≈ <b>${M(subAdd)}</b> with measurable subclinical injury but no diagnosed condition, on top of the <b>${M(r.everPeople)}</b> cumulative chronic. Combined ≈ <b>${M(subTotal)}</b> ever affected. <i>Speculative; not in the headline or chart.</i>`
+    : `<i>Off. Dial up to add a speculative subclinical layer on top of the estimate above.</i>`;
+  document.getElementById("pyrClar").innerHTML=`These bars are to scale and shift as you change the assumptions above. Each widens the population: from those <b>officially counted</b>, to what Tian et al. <b>clinically detected</b>, to everyone who <b>ever developed</b> a chronic condition under your assumptions. Below the waterline, subclinical injury (set by the dial) adds people with measurable damage but no diagnosis.`;
   document.getElementById("chartCap").innerHTML=on
-    ? `Each curve projects the cumulative chance of a <em>new</em> chronic condition as infections repeat. Your <b>${S.traj}</b> path is in clay and the dot marks your settings (<b>${PCT(r.everPeople)}</b> ever affected). Hover <span class="cl" data-h="Declines">declines</span>, <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compounds</span> to compare.`
-    : `The straight clay line is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The other curves project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`;
+    ? `Each curve projects the cumulative chance of a <em>new</em> chronic condition as infections repeat. Your <b>${S.traj}</b> path is <span class="cl" data-h="clay">in clay</span> and the dot marks your settings (<b>${PCT(r.everPeople)}</b> ever affected). Hover <span class="cl" data-h="Declines">declines</span>, <span class="cl" data-h="Flat">flat</span>, <span class="cl" data-h="Compounds">compounds</span>, or the <span class="cl" data-h="all">other curves</span> to compare.`
+    : `The <span class="cl" data-h="clay">straight clay line</span> is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The <span class="cl" data-h="all">other curves</span> project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`;
   drawChart(r.baseC); drawPyramid(r);
 }
 
@@ -474,12 +530,14 @@ bind("avgInf","avgInf",v=>+v);
 bind("persist","persist",v=>+v/100);
 bind("infShare","infShare",v=>+v/100);
 bind("chronRate","chronRate",v=>+v);
+bind("subclin","subclin",v=>+v);
 document.getElementById("resetBtn").addEventListener("click",()=>{
   Object.assign(S,DEFAULTS);
   document.getElementById("avgInf").value=S.avgInf;
   document.getElementById("persist").value=Math.round(S.persist*100);
   document.getElementById("infShare").value=Math.round(S.infShare*100);
   document.getElementById("chronRate").value=S.chronRate;
+  document.getElementById("subclin").value=S.subclin;
   render();
 });
 document.getElementById("yearTog").addEventListener("change",e=>{S.yearLayer=e.target.checked;document.getElementById("yearCap").style.display=e.target.checked?"block":"none";render();});
