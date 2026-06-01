@@ -24,7 +24,7 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem)
 h1 em{font-style:italic;color:var(--clay)}
 .dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 .9rem}
 .dek.lead{color:var(--ink);font-weight:500}
-.hl{background:linear-gradient(transparent 58%, rgba(176,116,26,.30) 58%);padding:0 .06em;font-weight:500;color:var(--ink)}
+.hl{background:linear-gradient(rgba(176,116,26,.28),rgba(176,116,26,.28));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;padding:0 .12em;font-weight:500;color:var(--ink);-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .sechead{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--ink);letter-spacing:-.01em;margin:0 0 .9rem}
 .rule{height:2px;background:var(--ink);width:54px;margin:0 0 1.6rem}
 .takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
@@ -84,6 +84,9 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .raterow .rateval{font-family:var(--mono);color:var(--clay);font-size:.82rem;white-space:nowrap}
 .chartcap{font-size:.78rem;color:var(--muted);line-height:1.5;margin:.15rem 0 .9rem;text-wrap:pretty}
 .chartcap b{color:var(--ink);font-weight:500}
+.chartcap .cl,.seg-traj button[data-h]{cursor:pointer}
+.chartcap .cl{color:var(--clay);border-bottom:1px dotted var(--clay);font-weight:500}
+.chartcap .cl:hover{background:rgba(158,61,43,.08)}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
@@ -212,9 +215,9 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <label>How does repeat infection change the risk? <span class="val" id="trajVal">Off</span></label>
         <div class="note" style="margin-bottom:.6rem">Tian et al. counted only each patient's first infection, so this starts <b>off</b>. Turn on a trajectory to project what repeat infections add. The science isn't settled, and it swings the result more than any other lever here.</div>
         <div class="seg seg-traj" id="traj">
-          <button data-t="Declines" type="button"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
-          <button data-t="Flat" type="button"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
-          <button data-t="Compounds" type="button"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+          <button data-t="Declines" data-h="Declines" type="button"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
+          <button data-t="Flat" data-h="Flat" type="button"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
+          <button data-t="Compounds" data-h="Compounds" type="button"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
         </div>
         <div class="raterow" id="rateRow" hidden>
           <div class="ratelab"><span id="rateLabel">How fast does it change each time?</span> <span class="rateval" id="rateVal">×0.60</span></div>
@@ -273,7 +276,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <h3 class="charth"><span>Cumulative chronic risk vs. number of infections</span>
           <label class="ytoggle"><input type="checkbox" id="yearTog"> Year overlay</label></h3>
         <div class="chartcap" id="chartCap"></div>
-        <svg id="chart" viewBox="0 0 520 230" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
+        <svg id="chart" viewBox="0 0 520 238" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
           <span><i style="background:#9E3D2B"></i>your scenario</span>
           <span><i style="background:#B0741A"></i>other trajectories</span>
@@ -328,7 +331,7 @@ const TRAJ_OFF="Reinfection isn't modeled, matching Tian et al., who counted onl
 const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
 const NMAX=10;
 const DEFAULTS={traj:null,avgInf:5,persist:0.90,infShare:0.90,chronRate:0.145,declRate:0.6,compRate:1.2};
-let S=Object.assign({yearLayer:false},DEFAULTS);
+let S=Object.assign({yearLayer:false,hover:null},DEFAULTS);
 const factorOf=t=>t==="Declines"?S.declRate:t==="Compounds"?S.compRate:t==="Flat"?1:0;
 
 const pk=(base,f,k)=>Math.min(base*(k===1?1:Math.pow(f,k-1)),1);
@@ -347,7 +350,7 @@ function compute(){
 }
 
 function drawChart(baseC){
-  const x0=40,x1=505,y0=18,y1=196,maxR=1;
+  const x0=52,x1=505,y0=18,y1=196,maxR=1;
   const X=k=>x0+(k-1)/(NMAX-1)*(x1-x0), Y=r=>y1-Math.min(r,maxR)/maxR*(y1-y0);
   const START=2020.2,PACE=(2026-START)/5,yearFor=k=>START+k*PACE,nowX=X(5);
   let g='<defs><linearGradient id="selFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9E3D2B" stop-opacity="0.13"/><stop offset="100%" stop-color="#9E3D2B" stop-opacity="0"/></linearGradient></defs>';
@@ -357,6 +360,8 @@ function drawChart(baseC){
   [0,.25,.5,.75,1].forEach(r=>{g+=`<text x="${x0-6}" y="${Y(r)+4}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="end">${Math.round(r*100)}%</text>`;
     g+=`<line x1="${x0}" y1="${Y(r)}" x2="${x1}" y2="${Y(r)}" stroke="#211F18" stroke-opacity=".08"/>`;});
   for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle">${k}</text>`;
+  g+=`<text x="${(x0+x1)/2}" y="230" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" letter-spacing=".4">Number of infections (per person)</text>`;
+  g+=`<text x="13" y="${(y0+y1)/2}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 13 ${(y0+y1)/2})">Cumulative chance (%)</text>`;
   if(S.yearLayer){
     for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B0741A':'#6E6857'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
     g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#211F18" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
@@ -364,8 +369,9 @@ function drawChart(baseC){
   }
   ORDER.forEach(t=>{
     if(t===S.traj) return;
+    const hov=t===S.hover;
     let pts=[];for(let k=1;k<=NMAX;k++)pts.push(`${X(k)},${Y(cumRisk(baseC,factorOf(t),k))}`);
-    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.other}" stroke-width="1.2" stroke-opacity=".4"/>`;
+    g+=`<polyline points="${pts.join(" ")}" fill="none" stroke="${COL.other}" stroke-width="${hov?2.6:1.2}" stroke-opacity="${hov?1:.4}"/>`;
   });
   if(S.traj){
     const f=factorOf(S.traj);
@@ -450,8 +456,8 @@ function render(){
     ? `Each band removes a blind spot. The upper bands widen <b>who gets counted</b> (codes → clinical detection → everyone infected). The reinfection band raises each person's odds across repeat infections. It doesn't add new people. Infections aren't people: <b>~${(events/1e9).toFixed(1)}B</b> infection-events have landed on ~262M adults.`
     : `Each band widens <b>who gets counted</b> (codes → clinical detection → everyone infected). Reinfection modeling is off, so each person is counted with a single infection, the Tian et al. baseline.`;
   document.getElementById("chartCap").innerHTML=on
-    ? `Each line is a scenario for how the chance of a <em>new</em> chronic condition changes as infections repeat. The clay dot marks your settings; its height is the cumulative chance one person has developed a chronic condition, the figure behind <b>${PCT(r.everPeople)}</b> ever affected above.`
-    : `With reinfection modeling off, the chance stays flat at Tian et al.'s per-infection rate (<b>${(r.baseC*100).toFixed(1)}%</b>), the straight clay line. The faint curves show what turning on a trajectory would do.`;
+    ? `Each curve projects the cumulative chance of a <em>new</em> chronic condition as infections repeat. Your <b>${S.traj}</b> path is in clay and the dot marks your settings (<b>${PCT(r.everPeople)}</b> ever affected). Hover <span class="cl" data-h="Declines">declines</span>, <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compounds</span> to compare.`
+    : `The straight clay line is the per-infection rate of a new chronic condition (<b>${(r.baseC*100).toFixed(1)}%</b>), anchored to the <b>14.5%</b> Tian et al. measured. The other curves project how it would change if reinfections make it <span class="cl" data-h="Declines">decline</span>, hold <span class="cl" data-h="Flat">flat</span>, or <span class="cl" data-h="Compounds">compound</span>.`;
   drawChart(r.baseC); drawPyramid(r);
 }
 
@@ -477,6 +483,10 @@ document.getElementById("resetBtn").addEventListener("click",()=>{
   render();
 });
 document.getElementById("yearTog").addEventListener("change",e=>{S.yearLayer=e.target.checked;document.getElementById("yearCap").style.display=e.target.checked?"block":"none";render();});
+[document.querySelector(".chartwrap"),document.getElementById("traj")].forEach(el=>{
+  el.addEventListener("mouseover",e=>{const h=e.target.closest("[data-h]");if(h){S.hover=h.dataset.h;drawChart(S.chronRate);}});
+  el.addEventListener("mouseout",e=>{const h=e.target.closest("[data-h]");if(h){S.hover=null;drawChart(S.chronRate);}});
+});
 render();
 </script>
 </body>
