@@ -217,7 +217,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
           <div class="foundlead">Foundation — the recognition gap</div>
           Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else — and never connect it to COVID.
           <div class="gapbar"><span class="gapseg gap-rec" id="gapRec" style="width:21%"></span><span class="gapseg gap-un" id="gapUn" style="width:79%"></span></div>
-          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one — a recognition gap of <b class="un" id="gapNum">~55M</b> never connected to COVID.</div>
+          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one — a recognition gap of <b class="un" id="gapNum">~55M</b>, or <b class="un" id="gapPct">21%</b> of U.S. adults, who developed a chronic condition and never connected it to COVID.</div>
         </div>
       </div>
     </div>
@@ -344,6 +344,7 @@ function render(){
   document.getElementById("gapUn").style.width=((1-recFrac)*100).toFixed(1)+"%";
   document.getElementById("gapEver").textContent=M(everC);
   document.getElementById("gapNum").textContent="~"+M(gp);
+  document.getElementById("gapPct").textContent=PCT(gp);
   drawChart(r.baseC); drawPyramid(r);
 }
 
