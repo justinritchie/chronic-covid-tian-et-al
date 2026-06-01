@@ -95,7 +95,15 @@ svg{display:block;width:100%;height:auto}
 .tier.tappable{cursor:pointer}
 .tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
 .tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
-.found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;color:var(--muted);text-align:center}
+.found{margin-top:.5rem;border:1px dashed var(--line);border-radius:8px;padding:.75rem .85rem;font-size:.82rem;color:var(--muted);text-align:left}
+.found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
+.gapbar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.65rem 0 .4rem;background:var(--line)}
+.gapseg{height:100%;transition:width .3s}
+.gap-rec{background:#6E6857}
+.gap-un{background:#9E3D2B}
+.gapcap{font-size:.76rem;line-height:1.5}
+.gapcap b{color:var(--ink);font-weight:500}
+.gapcap .un{color:var(--clay)}
 .note-block{background:var(--paper2);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.9rem;color:var(--ink)}
 .note-block b{color:var(--clay)}
 footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
@@ -205,7 +213,12 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <h3>The conservatism pyramid — counted → true burden</h3>
         <div class="hint">Tap any amber or red layer to jump to the assumption behind it.</div>
         <div id="pyramid"></div>
-        <div class="found">Foundation: <b>the recognition gap</b> — most people file a new condition under "getting older" or "the vaccine," never COVID.</div>
+        <div class="found">
+          <div class="foundlead">Foundation — the recognition gap</div>
+          Because of gaps in testing and diagnostics for Long COVID, most people would reasonably attribute a new chronic condition to something else — and never connect it to COVID.
+          <div class="gapbar"><span class="gapseg gap-rec" id="gapRec" style="width:21%"></span><span class="gapseg gap-un" id="gapUn" style="width:79%"></span></div>
+          <div class="gapcap">Official surveillance counts <b>~15M</b>. This model implies <b id="gapEver">70M</b> ever developed one — a recognition gap of <b class="un" id="gapNum">~55M</b> never connected to COVID.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -326,6 +339,11 @@ function render(){
   document.getElementById("adjVal").textContent=S.netAdj.toFixed(2)+"×";
   const yrs=(new Date()-new Date(2020,2,1))/(365.25*864e5);
   document.getElementById("infRate").innerHTML=`≈ <b>${(S.avgInf/yrs).toFixed(2)}</b> infections per year since March 2020 (~${yrs.toFixed(1)} yrs) — you set the total; the yearly rate follows`;
+  const recog=15e6, everC=r.everPeople, gp=Math.max(0,everC-recog), recFrac=everC>0?Math.min(recog/everC,1):1;
+  document.getElementById("gapRec").style.width=(recFrac*100).toFixed(1)+"%";
+  document.getElementById("gapUn").style.width=((1-recFrac)*100).toFixed(1)+"%";
+  document.getElementById("gapEver").textContent=M(everC);
+  document.getElementById("gapNum").textContent="~"+M(gp);
   drawChart(r.baseC); drawPyramid(r);
 }
 
