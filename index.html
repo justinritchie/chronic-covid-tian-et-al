@@ -32,6 +32,11 @@ h1 em{font-style:italic;color:var(--clay)}
 .hero .big{font-family:var(--display);font-size:clamp(2.2rem,6vw,3.2rem);font-weight:600;line-height:1;letter-spacing:-.02em}
 .hero .sub{color:var(--muted);font-size:.92rem;max-width:30ch;margin-top:.3rem}
 .hero .div{width:1px;align-self:stretch;background:var(--line)}
+.about{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:0 0 1.6rem}
+@media(max-width:820px){.about{grid-template-columns:1fr}}
+.about .ab{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem}
+.about .abk{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.4rem}
+.about .abv{font-size:.86rem;color:var(--ink);line-height:1.5}
 .tag{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
   padding:.18rem .5rem;border-radius:999px;border:1px solid currentColor}
 .tag.measured{color:var(--teal)} .tag.slider{color:var(--amber)} .tag.out{color:var(--clay)}
@@ -132,6 +137,12 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <div class="big">1 in 7</div>
       <div class="sub">developed a new <b>chronic</b> condition requiring ongoing care (14.5%<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a>). <span class="tag measured">measured</span></div>
     </div>
+  </div>
+
+  <div class="about">
+    <div class="ab"><div class="abk">The study</div><div class="abv">A retrospective look at 457,950 adults with a documented COVID infection across 58 US hospitals (4 regions), 2020–2024.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a></div></div>
+    <div class="ab"><div class="abk">What it found</div><div class="abv">1 in 6 developed Long COVID and 1 in 7 a chronic condition needing ongoing care — more than double what diagnostic codes capture, and still rising through 2024.</div></div>
+    <div class="ab"><div class="abk">How "chronic" was defined</div><div class="abv">An AI algorithm flagged new conditions that appear 3+ months after infection, persist 2+ months, and aren't explained by prior illness; a clinician then classified each by chronicity. 89% of cases qualified.</div></div>
   </div>
 
   <div class="grid">
