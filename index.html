@@ -46,6 +46,12 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .about .abk{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.4rem}
 .about .abv{font-size:.86rem;color:var(--ink);line-height:1.5}
 .about .num{color:var(--clay);font-weight:500}
+.conslist{list-style:none;margin:.15rem 0 0;padding:0}
+.conslist li{position:relative;padding-left:1.05rem;margin-bottom:.5rem;font-size:.86rem;line-height:1.5;color:var(--ink)}
+.conslist li:last-child{margin-bottom:0}
+.conslist li::before{content:"";position:absolute;left:0;top:.52em;width:6px;height:6px;border-radius:50%;background:var(--clay)}
+.conslist b{color:var(--clay);font-weight:500}
+.consend{font-size:.86rem;color:var(--ink);margin-top:.75rem}
 .cite{font-size:.76rem;color:var(--muted);line-height:1.55;border-top:1px solid var(--line);padding-top:.85rem;margin:0 0 1.9rem}
 .cite a{color:var(--teal)}
 .srct{color:var(--ink);font-weight:500}
@@ -224,7 +230,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
 <div class="wrap">
   <p class="kicker">Building on the findings of Tian et al., JAMA Network Open 2026</p>
   <h1>How many live with a <em>chronic</em> condition developed from a COVID infection?</h1>
-  <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes capture. The study was conservative by design, given the gaps in the data.</p>
+  <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes designed for long COVID capture. The study was conservative by design, given the gaps in the data.</p>
   <p class="dek lead">So how many Americans actually have a chronic condition from COVID?</p>
   <p class="dek">Start from what the study measured, set the assumptions you find plausible, and get your estimate.</p>
   <div class="rule"></div>
@@ -250,7 +256,14 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     <div class="ab"><div class="abk">Predominantly chronic</div><div class="abv"><b class="num">89%</b> of Long COVID cases were chronic. The authors frame PASC as a chronic disease burden, not a passing illness.</div></div>
     <div class="ab"><div class="abk">A surveillance gap</div><div class="abv">The algorithm found over <b class="num">2×</b> the cases diagnostic codes capture. Most are managed under other labels, invisible to official tracking.</div></div>
     <div class="ab"><div class="abk">Still climbing</div><div class="abv">Cumulative prevalence kept rising through <b class="num">mid-2024</b>, well after widespread vaccination. The authors call it an accumulating burden, not a resolving one.</div></div>
-    <div class="ab"><div class="abk">Why this is conservative</div><div class="abv">It counts only documented infections, and only each patient's first. It also excludes any new condition that could be pinned on a prior illness, so a COVID infection that <b>worsened a condition someone already had</b> was not counted. Patients who never sought care stay invisible too. The true burden is almost certainly higher.</div></div>
+    <div class="ab"><div class="abk">Why this is conservative</div>
+      <ul class="conslist">
+        <li><b>Documented infections only.</b> Untested or unrecorded cases don't count.</li>
+        <li><b>First infection only.</b> Reinfections aren't included.</li>
+        <li><b>No worsening of existing conditions.</b> Anything that could be pinned on a prior illness was excluded.</li>
+        <li><b>Care-seekers only.</b> People who never sought care stay invisible.</li>
+      </ul>
+      <div class="consend">The true burden is almost certainly higher.</div></div>
   </div>
 
   <div class="cite">Tian J, Azhir A, Decaro M, Chau N, Hügel J, Morris M, Cheng J, Fard P, Bassett IV, Bell DS, Bernstam EV, Visweswaran S, Klann JG, Murphy SN, Estiri H. <span class="srct">Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals.</span> <em>JAMA Network Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></div>
