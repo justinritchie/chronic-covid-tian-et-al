@@ -86,6 +86,11 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .ctl.traj-off > label,.ctl.traj-off .note,.ctl.traj-off .trajinfo{opacity:.6}
 .offhint{font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic}
 .sublab{font-size:.84rem;font-weight:500;color:var(--ink);margin:1rem 0 .5rem}
+.asec{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:.3rem 0 .95rem;display:flex;align-items:center;gap:.6rem}
+.asec::after{content:"";flex:1;height:1px;background:var(--line)}
+.asec.measured{color:var(--teal)}
+.ctl.measured{background:rgba(15,110,86,.05)}
+.ctl.measured .val{color:var(--teal)}
 .raterow{margin:.8rem 0 .2rem;padding:.65rem .8rem;background:var(--paper2);border-radius:10px}
 .raterow .ratelab{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.82rem;font-weight:500;margin-bottom:.1rem}
 .raterow .rateval{font-family:var(--mono);color:var(--clay);font-size:.82rem;white-space:nowrap}
@@ -280,12 +285,22 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <h2>Your assumptions</h2>
       <div class="resetrow"><button class="reset" id="resetBtn" type="button">↺ Reset to Tian et al. baseline</button></div>
 
+      <div class="asec measured">Measured by Tian et al.</div>
+
+      <div class="ctl measured" id="ctl-adj">
+        <label>Chronic conditions per infection <span class="val" id="adjVal">14.5%</span></label>
+        <div class="note">Tian et al. measured 14.5% per documented infection. Raise it if missed or untested infections hide real cases. Lower it if undocumented infections were milder.</div>
+        <input type="range" id="chronRate" min="0.10" max="0.19" step="0.005" value="0.145">
+      </div>
+
+      <div class="asec">Beyond the study · you decide</div>
+
       <div class="ctl" id="ctl-traj">
-        <label>Does repeat infection change the chronic-disease risk? <span class="val" id="trajVal">No</span></label>
-        <div class="note">Tian et al. didn't model how reinfection affects chronic-disease risk. They counted only each patient's first infection. The science isn't settled, and this swings the result more than any other lever, so it starts off.</div>
+        <label>Model the effect of repeat infections? <span class="val" id="trajVal">Off</span></label>
+        <div class="note">Tian et al. didn't study this. They counted only each patient's first infection, so it stays off. The science isn't settled, and it swings the result more than any other lever.</div>
         <div class="seg" id="reinfToggle" style="margin-top:.7rem">
-          <button data-r="no" type="button">No</button>
-          <button data-r="yes" type="button">Yes</button>
+          <button data-r="no" type="button">Off</button>
+          <button data-r="yes" type="button">On</button>
         </div>
         <div id="reinfBody" hidden>
           <div class="sublab">How does the risk change with each reinfection?</div>
@@ -305,7 +320,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <div class="ctl" id="ctl-inf">
         <label>Average infections per person <span class="val" id="infVal">5</span></label>
         <div class="note" id="infNote">Wastewater models put the U.S. average above 5 by early 2026 (Hoerger / PMC<a class="fn" href="#s4" title="Michael Hoerger / Pandemic Mitigation Collaborative, profile">4</a>). Tian et al. count only the first.</div>
-        <div class="offhint" id="infOff" hidden>Reinfection modeling is off, so this has no effect yet. Turn on a trajectory above to vary it.</div>
+        <div class="offhint" id="infOff" hidden>Repeat-infection modeling is off, so this has no effect yet. Switch it on above to vary it.</div>
         <input type="range" id="avgInf" min="1" max="10" step="1" value="5">
         <div class="derived" id="infRate">…</div>
       </div>
@@ -322,13 +337,6 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <input type="range" id="infShare" min="70" max="95" step="1" value="90">
       </div>
 
-      <div class="ctl" id="ctl-adj">
-        <label>Chronic conditions per infection <span class="val" id="adjVal">14.5%</span></label>
-        <div class="note">Tian et al. measured 14.5% per documented infection. Raise it if missed or untested infections hide real cases; lower it if undocumented infections were milder.</div>
-        <input type="range" id="chronRate" min="0.10" max="0.19" step="0.005" value="0.145">
-      </div>
-
-      <div class="subdiv"></div>
       <div class="ctl" id="ctl-subclin">
         <label>Subclinical impacts <span class="val" id="subVal">off</span></label>
         <div class="note">Measurable injury beyond any diagnosis: brain, heart, and vascular changes found in people with no symptoms.<a class="fn" href="#s8" title="UK Biobank brain imaging; C-MORE multi-organ MRI">8</a> Speculative, so it stays out of the headline and chart; it shows as the dashed bar in the pyramid.</div>
@@ -505,7 +513,7 @@ function render(){
   document.getElementById("hPct").textContent=PCT(r.active);
   document.getElementById("sEver").textContent=M(r.everPeople);
   document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
-  document.getElementById("trajVal").textContent=on?"Yes":"No";
+  document.getElementById("trajVal").textContent=on?"On":"Off";
   document.querySelector('#reinfToggle [data-r="no"]').classList.toggle("on",!on);
   document.querySelector('#reinfToggle [data-r="yes"]').classList.toggle("on",on);
   document.getElementById("reinfBody").hidden=!on;
