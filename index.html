@@ -224,6 +224,16 @@ svg{display:block;width:100%;height:auto}
 .gapcap .un{color:var(--clay)}
 .note-block{background:var(--paper2);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1.6rem;font-size:.9rem;color:var(--ink)}
 .note-block b{color:var(--clay)}
+.basedata{margin-top:2.2rem;border-top:1px solid var(--line);padding-top:1.2rem}
+.basedata .bdh{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:0 0 .35rem}
+.basedata .bdintro{font-size:.82rem;color:var(--muted);margin:0 0 1.1rem;max-width:64ch;text-wrap:pretty}
+.bdrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.25rem 1.2rem;align-items:baseline;padding:.55rem 0;border-top:1px solid var(--line)}
+.bdrow:first-of-type{border-top:none}
+.bdl{font-size:.84rem;color:var(--ink)}
+.bdv{font-family:var(--mono);font-weight:500;font-size:.86rem;color:var(--clay);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bds{font-family:var(--mono);font-size:.74rem;white-space:nowrap;text-align:right}
+.bds a{color:var(--teal);text-decoration:none;border-bottom:1px dotted var(--teal)}
+.bds a:hover{color:var(--clay);border-color:var(--clay)}
 footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
 footer a{color:var(--teal)} footer ol{margin:.5rem 0 0;padding-left:1.4rem} footer li{margin-bottom:.3rem}
 footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
@@ -390,8 +400,21 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
     </div>
   </div>
 
+  <div class="basedata">
+    <div class="bdh">Baseline data</div>
+    <p class="bdintro">Every figure the estimate is built from, with its source. Drop these into a spreadsheet and you can reproduce the model.</p>
+    <div class="bdrow"><span class="bdl">U.S. adults (18+)</span><span class="bdv">262M</span><span class="bds"><a href="#s9">Census</a></span></div>
+    <div class="bdrow"><span class="bdl">Chronic conditions per documented infection</span><span class="bdv">14.5%</span><span class="bds"><a href="#s1">Tian et al.</a></span></div>
+    <div class="bdrow"><span class="bdl">Surveillance gap, careful review vs. codes</span><span class="bdv">~2×</span><span class="bds"><a href="#s1">Tian et al.</a></span></div>
+    <div class="bdrow"><span class="bdl">Adults ever infected, by end-2022</span><span class="bdv">~77.5%</span><span class="bds"><a href="#s5">CDC</a></span></div>
+    <div class="bdrow"><span class="bdl">Average infections per person, by 2026</span><span class="bdv">~5</span><span class="bds"><a href="#s4">Hoerger / PMC</a></span></div>
+    <div class="bdrow"><span class="bdl">Long-term recovery anchor (ME/CFS)</span><span class="bdv">~5%</span><span class="bds"><a href="#s2">Cairns &amp; Hotopf</a></span></div>
+    <div class="bdrow"><span class="bdl">Currently report Long COVID (CDC survey)</span><span class="bdv">~15M</span><span class="bds"><a href="#s6">CDC</a></span></div>
+    <div class="bdrow"><span class="bdl">Ever reported Long COVID (CDC survey)</span><span class="bdv">~43M</span><span class="bds"><a href="#s6">CDC</a></span></div>
+  </div>
+
   <footer>
-    <strong>Sources.</strong> Click any <a class="fn" href="#s1" title="example">n</a> above to jump here; each links out.
+    <strong>Sources.</strong>
     <ol>
       <li id="s1">Tian J, et al. <span class="srct">Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals.</span> <em>JAMA Netw Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></li>
       <li id="s2">Cairns R, Hotopf M. <span class="srct">A systematic review describing the prognosis of chronic fatigue syndrome.</span> <em>Occup Med.</em> 2005;55(1):20–31. <a href="https://doi.org/10.1093/occmed/kqi013" target="_blank" rel="noopener">doi:10.1093/occmed/kqi013</a></li>
@@ -401,6 +424,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
       <li id="s6">CDC NCHS. <span class="srct">Long COVID, Household Pulse Survey.</span> <a href="https://www.cdc.gov/nchs/covid19/pulse/long-covid.htm" target="_blank" rel="noopener">cdc.gov/nchs</a></li>
       <li id="s7">Antonelli M, et al. <span class="srct">Risk of long COVID associated with delta versus omicron variants of SARS-CoV-2.</span> <em>Lancet.</em> 2022;399(10343):2263–2264. <a href="https://doi.org/10.1016/S0140-6736(22)00941-2" target="_blank" rel="noopener">doi:10.1016/S0140-6736(22)00941-2</a></li>
       <li id="s8">Douaud G, et al. <span class="srct">SARS-CoV-2 is associated with changes in brain structure in UK Biobank.</span> <em>Nature.</em> 2022. <a href="https://www.medrxiv.org/content/10.1101/2021.06.11.21258690" target="_blank" rel="noopener">study</a>. Raman B, et al. <span class="srct">C-MORE multi-organ MRI of COVID-19 survivors.</span> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8586081/" target="_blank" rel="noopener">PMC</a></li>
+      <li id="s9">U.S. Census Bureau. <span class="srct">National population by age</span> (adults 18+, ~262 million). <a href="https://www.census.gov/" target="_blank" rel="noopener">census.gov</a></li>
     </ol>
   </footer>
 </div>
@@ -493,7 +517,7 @@ function drawPyramid(r){
   };
   let h='';
   h+=frow("Officially counted now",M(coded),W(coded),"#8C8676",{cite:6,desc:"Adults who report Long COVID now in the CDC's national survey. The U09.9 billing code captures even fewer."});
-  h+=frow("Clinically detected (our estimate)",M(detected),W(detected),"#0F6E56",{desc:"Applying Tian et al.'s finding that review catches about 2× the diagnostic codes.<a class='fn' href='#s1'>1</a> Not a figure from the study."});
+  h+=frow("Clinically detected, nationwide estimate",M(detected),W(detected),"#0F6E56",{desc:"Applying Tian et al.'s finding that review catches about 2× the diagnostic codes.<a class='fn' href='#s1'>1</a>"});
   h+=frow("Ever-developed chronic conditions (your estimate)",M(ever),W(ever),"#9E3D2B",{ctl:"ctl-traj",desc:"Scaled to all U.S. adults, including those who have recovered"});
   h+='<div class="fwater">below the waterline</div>';
   h+= on ? frow("+ Subclinical impacts (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin",desc:"Measurable injury, no diagnosed condition"})
@@ -550,7 +574,7 @@ function render(){
   document.getElementById("subVal").textContent=S.subclin?S.subclin+"%":"off";
   document.getElementById("subOut").innerHTML=S.subclin
     ? `Adds ≈ <b>${M(subAdd)}</b> with measurable subclinical injury but no diagnosed condition, on top of the <b>${M(r.everPeople)}</b> cumulative chronic. Combined ≈ <b>${M(subTotal)}</b> ever affected. <i>Speculative; not in the headline or chart.</i>`
-    : `<i>Off. Dial up to add a speculative subclinical layer on top of the estimate above.</i>`;
+    : ``;
   const yrTip="Maps the infection-count axis to calendar years at the average pace (~0.85 infections/yr), so the 5th ≈ 2026";
   const yrLink=S.yearLayer
     ? ` These are now placed on <span class="yrtog" data-yeartoggle title="${yrTip}">calendar years</span>; click to switch back.`
