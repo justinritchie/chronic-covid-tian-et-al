@@ -380,7 +380,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <div class="funnelcard">
           <div class="pyrhead">
             <h3>The detection pyramid<span class="pyrsub">counted → true burden experienced</span></h3>
-            <div class="undetbox"><div class="undetn" id="undetN">2.3×</div><div class="undetl">vs. officially coded<br>Long COVID</div></div>
+            <div class="undetbox"><div class="undetn" id="undetN">2.3×</div><div class="undetl">vs. officially<br>counted now</div></div>
           </div>
           <div class="hint">Every band counts Americans with a new chronic condition from COVID, at a different level of detection. Drawn to scale, narrowest (most strictly counted) at the top.</div>
           <div class="funnel" id="pyramid"></div>
@@ -492,8 +492,8 @@ function drawPyramid(r){
     return `<div class="frow${tap}"><div class="flabel"><span class="frole">${role}${cite}${arrow}</span><span class="fnum">${num}</span></div><div class="fbarwrap"><div class="${barcls}" style="${st}"></div></div><div class="fdesc">${o.desc||''}</div></div>`;
   };
   let h='';
-  h+=frow("Officially coded chronic conditions (U09.9)",M(coded),W(coded),"#8C8676",{cite:6,desc:"What medical billing captures"});
-  h+=frow("Clinically detected chronic conditions (Tian et al.)",M(detected),W(detected),"#0F6E56",{cite:1,desc:"About 2× the codes, found on the study's chart review"});
+  h+=frow("Officially counted now",M(coded),W(coded),"#8C8676",{cite:6,desc:"Adults who report Long COVID now in the CDC's national survey. The U09.9 billing code captures even fewer."});
+  h+=frow("Clinically detected (our estimate)",M(detected),W(detected),"#0F6E56",{desc:"Applying Tian et al.'s finding that review catches about 2× the diagnostic codes.<a class='fn' href='#s1'>1</a> Not a figure from the study."});
   h+=frow("Ever-developed chronic conditions (your estimate)",M(ever),W(ever),"#9E3D2B",{ctl:"ctl-traj",desc:"Scaled to all U.S. adults, including those who have recovered"});
   h+='<div class="fwater">below the waterline</div>';
   h+= on ? frow("+ Subclinical impacts (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin",desc:"Measurable injury, no diagnosed condition"})
