@@ -60,7 +60,7 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .grid{display:grid;grid-template-columns:1fr;gap:1.6rem}
 @media(min-width:1024px){.grid{grid-template-columns:minmax(0,340px) minmax(0,1fr)}}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem}
-.panel h2{font-family:var(--display);font-weight:500;font-size:1.18rem;margin:.1rem 0 1.1rem;display:flex;justify-content:space-between;align-items:baseline}
+.panel h2{font-family:var(--display);font-weight:500;font-size:1.18rem;margin:.1rem 0 1.1rem;text-align:center}
 .resetrow{display:flex;justify-content:center;margin:-.5rem 0 1rem}
 .reset{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.34rem .8rem;cursor:pointer;transition:border-color .15s,background .15s}
 .reset:hover{border-color:var(--clay);background:rgba(158,61,43,.06)}
@@ -79,6 +79,7 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .ctl.traj-off{background:rgba(110,104,87,.06)}
 .ctl.traj-off > label,.ctl.traj-off .note,.ctl.traj-off .trajinfo{opacity:.6}
 .offhint{font-size:.78rem;color:var(--muted);margin-top:.45rem;font-style:italic}
+.sublab{font-size:.84rem;font-weight:500;color:var(--ink);margin:1rem 0 .5rem}
 .raterow{margin:.8rem 0 .2rem;padding:.65rem .8rem;background:var(--paper2);border-radius:10px}
 .raterow .ratelab{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.82rem;font-weight:500;margin-bottom:.1rem}
 .raterow .rateval{font-family:var(--mono);color:var(--clay);font-size:.82rem;white-space:nowrap}
@@ -263,22 +264,29 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   <div class="grid">
     <!-- CONTROLS -->
     <div class="panel">
-      <h2>Your assumptions <span class="tag slider">you set these</span></h2>
+      <h2>Your assumptions</h2>
       <div class="resetrow"><button class="reset" id="resetBtn" type="button">↺ Reset to Tian et al. baseline</button></div>
 
       <div class="ctl" id="ctl-traj">
-        <label>How does repeat infection change the risk? <span class="val" id="trajVal">Off</span></label>
-        <div class="note" style="margin-bottom:.6rem">Tian et al. counted only each patient's first infection, so this starts <b>off</b>. Turn on a trajectory to project what repeat infections add. The science isn't settled, and it swings the result more than any other lever here.</div>
-        <div class="seg seg-traj" id="traj">
-          <button data-t="Declines" data-h="Declines" type="button"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
-          <button data-t="Flat" data-h="Flat" type="button"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
-          <button data-t="Compounds" data-h="Compounds" type="button"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+        <label>Does repeat infection change the chronic-disease risk? <span class="val" id="trajVal">No</span></label>
+        <div class="note">Tian et al. didn't model how reinfection affects chronic-disease risk. They counted only each patient's first infection. The science isn't settled, and this swings the result more than any other lever, so it starts off.</div>
+        <div class="seg" id="reinfToggle" style="margin-top:.7rem">
+          <button data-r="no" type="button">No</button>
+          <button data-r="yes" type="button">Yes</button>
         </div>
-        <div class="raterow" id="rateRow" hidden>
-          <div class="ratelab"><span id="rateLabel">How fast does it change each time?</span> <span class="rateval" id="rateVal">×0.60</span></div>
-          <input type="range" id="rateSlider" min="0.3" max="0.95" step="0.05" value="0.6">
+        <div id="reinfBody" hidden>
+          <div class="sublab">How does the risk change with each reinfection?</div>
+          <div class="seg seg-traj" id="traj">
+            <button data-t="Declines" data-h="Declines" type="button"><span class="bt">Declines</span><span class="bsub">eases each time</span></button>
+            <button data-t="Flat" data-h="Flat" type="button"><span class="bt">Flat</span><span class="bsub">same each time</span></button>
+            <button data-t="Compounds" data-h="Compounds" type="button"><span class="bt">Compounds</span><span class="bsub">worsens each time</span></button>
+          </div>
+          <div class="raterow" id="rateRow" hidden>
+            <div class="ratelab"><span id="rateLabel">How fast does it change each time?</span> <span class="rateval" id="rateVal">×0.60</span></div>
+            <input type="range" id="rateSlider" min="0.3" max="0.95" step="0.05" value="0.6">
+          </div>
+          <div class="trajinfo" id="trajInfo"></div>
         </div>
-        <div class="trajinfo" id="trajInfo"></div>
       </div>
 
       <div class="ctl" id="ctl-inf">
@@ -362,7 +370,7 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
   </div>
 
   <div class="note-block">
-    <b>How to read this.</b> The headline rate (top) is what Tian et al. <em>measured</em>. Everything below it depends on assumptions the data can't settle, so you set them and the estimate updates. The study can't tell how many cases resolved,<a class="fn" href="#s1" title="Tian et al. 2026">1</a> so it counts people <b>ever</b> affected, not those active today; the persistence slider bridges that gap.
+    <b>Reading the numbers.</b> Only the top rate is measured.<a class="fn" href="#s1" title="Tian et al., JAMA Network Open 2026">1</a> Everything below it rests on the assumptions you pick, so treat the totals as a range for discussion, not a hard count. And because the study can't see who recovered, the figures count everyone who has <b>ever</b> developed a chronic condition; the persistence slider is where you estimate how many still have one.
   </div>
 
   <footer>
@@ -488,7 +496,10 @@ function render(){
   document.getElementById("hPct").textContent=PCT(r.active);
   document.getElementById("sEver").textContent=M(r.everPeople);
   document.getElementById("sEverPct").textContent=PCT(r.everPeople)+" of adults";
-  document.getElementById("trajVal").textContent=on?S.traj:"Off";
+  document.getElementById("trajVal").textContent=on?"Yes":"No";
+  document.querySelector('#reinfToggle [data-r="no"]').classList.toggle("on",!on);
+  document.querySelector('#reinfToggle [data-r="yes"]').classList.toggle("on",on);
+  document.getElementById("reinfBody").hidden=!on;
   document.querySelectorAll("#traj button").forEach(x=>x.classList.toggle("on",x.dataset.t===S.traj));
   if(on){const ti=TRAJ_INFO[S.traj];
     document.getElementById("trajInfo").innerHTML=ti.d+'<span class="ev"><b>Evidence:</b> '+ti.ev+(ti.href?' <a class="evlink" href="'+ti.href+'">source ↗</a>':'')+'</span>';
@@ -505,7 +516,6 @@ function render(){
   } else { rateRow.hidden=true; }
   const infCtl=document.getElementById("ctl-inf"), infEl=document.getElementById("avgInf");
   infCtl.classList.toggle("off",!on); infEl.disabled=!on;
-  document.getElementById("ctl-traj").classList.toggle("traj-off",!on);
   document.getElementById("infNote").hidden=!on;
   document.getElementById("infOff").hidden=on;
   document.getElementById("infRate").style.display=on?"":"none";
@@ -534,8 +544,12 @@ function render(){
   drawChart(r.baseC); drawPyramid(r);
 }
 
+document.querySelectorAll("#reinfToggle button").forEach(b=>b.addEventListener("click",()=>{
+  if(b.dataset.r==="yes"){ if(!S.traj) S.traj="Flat"; } else { S.traj=null; }
+  render();
+}));
 document.querySelectorAll("#traj button").forEach(b=>b.addEventListener("click",()=>{
-  S.traj=(S.traj===b.dataset.t)?null:b.dataset.t; render();
+  S.traj=b.dataset.t; render();
 }));
 document.getElementById("rateSlider").addEventListener("input",e=>{
   const v=+e.target.value;
