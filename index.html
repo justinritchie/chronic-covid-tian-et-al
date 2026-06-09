@@ -4,27 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Long COVID Chronic-Burden Calculator</title>
-<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iI0YyRUVFMyIvPjxnIGZpbGw9IiM5RTNEMkIiPjxjaXJjbGUgY3g9IjkiIGN5PSIxMSIgcj0iMy40Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMSIgcj0iMy40IiBvcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjExIiByPSIzLjQiIG9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjkiIGN5PSIyMSIgcj0iMy40IiBvcGFjaXR5PSIwLjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjIxIiByPSIzLjQiIG9wYWNpdHk9IjAuMiIvPjxjaXJjbGUgY3g9IjIzIiBjeT0iMjEiIHI9IjMuNCIgb3BhY2l0eT0iMC4yIi8+PC9nPjwvc3ZnPgo=">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iI0ZGRkZGRiIgc3Ryb2tlPSIjMTYxNjE2IiBzdHJva2Utd2lkdGg9IjEuNCIvPjxnIGZpbGw9IiNDODI2MUMiPjxjaXJjbGUgY3g9IjkiIGN5PSIxMSIgcj0iMy40Ii8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxMSIgcj0iMy40IiBvcGFjaXR5PSIwLjIyIi8+PGNpcmNsZSBjeD0iMjMiIGN5PSIxMSIgcj0iMy40IiBvcGFjaXR5PSIwLjIyIi8+PGNpcmNsZSBjeD0iOSIgY3k9IjIxIiByPSIzLjQiIG9wYWNpdHk9IjAuMjIiLz48Y2lyY2xlIGN4PSIxNiIgY3k9IjIxIiByPSIzLjQiIG9wYWNpdHk9IjAuMjIiLz48Y2lyY2xlIGN4PSIyMyIgY3k9IjIxIiByPSIzLjQiIG9wYWNpdHk9IjAuMjIiLz48L2c+PC9zdmc+">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F2EEE3; --paper2:#E9E3D4; --panel:#FBF9F3;
-  --ink:#211F18; --muted:#6E6857; --faint:#8C8676; --line:rgba(33,31,24,.14);
-  --teal:#0F6E56; --amber:#B0741A; --clay:#9E3D2B;
-  --display:'Fraunces',Georgia,serif; --body:'IBM Plex Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  --paper:#FFFFFF; --paper2:#F2F2EF; --panel:#FBFBF9;
+  --ink:#161616; --muted:#6B6B6B; --faint:#9C9C97; --line:rgba(22,22,22,.13);
+  --teal:#1D4E78; --amber:#B08A2E; --clay:#C8261C;
+  --display:'Newsreader',Georgia,serif; --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.55;
-  background-image:radial-gradient(rgba(33,31,24,.035) 1px,transparent 1px);background-size:22px 22px;}
+  background-image:radial-gradient(rgba(22,22,22,.04) 1px,transparent 1px);background-size:22px 22px;}
 .wrap{max-width:1120px;margin:0 auto;padding:clamp(1.2rem,4vw,3rem) clamp(1rem,4vw,2.2rem) 4rem;}
 .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin:0 0 .8rem}
 h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.02;letter-spacing:-.01em;margin:.1rem 0 .7rem}
 h1 em{font-style:italic;color:var(--clay)}
 .dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 .9rem}
 .dek.lead{color:var(--ink);font-weight:500}
-.hl{background:linear-gradient(rgba(176,116,26,.28),rgba(176,116,26,.28));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;padding:0 .12em;font-weight:500;color:var(--ink);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl{background:linear-gradient(rgba(244,208,63,.55),rgba(244,208,63,.55));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;padding:0 .12em;font-weight:500;color:var(--ink);-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .sechead{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--ink);letter-spacing:-.01em;margin:0 0 .9rem}
 .rule{height:2px;background:var(--ink);width:54px;margin:0 0 1.6rem}
 .takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
@@ -69,11 +69,11 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .panel h2{font-family:var(--display);font-weight:500;font-size:1.18rem;margin:.1rem 0 1.1rem;text-align:center}
 .resetrow{display:flex;justify-content:center;margin:-.5rem 0 1rem}
 .reset{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--clay);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.34rem .8rem;cursor:pointer;transition:border-color .15s,background .15s}
-.reset:hover{border-color:var(--clay);background:rgba(158,61,43,.06)}
+.reset:hover{border-color:var(--clay);background:rgba(200,38,28,.06)}
 .reset:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
 .ctl{margin-bottom:1.1rem;padding:.55rem .7rem;margin-left:-.7rem;margin-right:-.7rem;border-radius:10px;background:transparent}
 .ctl.flash{animation:flashbg 1.2s ease}
-@keyframes flashbg{0%{background:rgba(158,61,43,.16)}100%{background:transparent}}
+@keyframes flashbg{0%{background:rgba(200,38,28,.16)}100%{background:transparent}}
 .ctl > label{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-weight:500;font-size:.96rem;line-height:1.32;border-bottom:1px solid var(--line);padding-bottom:.42rem;margin-bottom:.5rem}
 .ctl .val{font-family:var(--mono);color:var(--clay);font-size:.95rem;white-space:nowrap}
 .ctl .note{font-size:.78rem;color:var(--muted);margin-top:.45rem}
@@ -89,7 +89,7 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .asec{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:.3rem 0 .95rem;display:flex;align-items:center;gap:.6rem}
 .asec::after{content:"";flex:1;height:1px;background:var(--line)}
 .asec.measured{color:var(--teal)}
-.ctl.measured{background:rgba(15,110,86,.05)}
+.ctl.measured{background:rgba(29,78,120,.06)}
 .ctl.measured .val{color:var(--teal)}
 .raterow{margin:.8rem 0 .2rem;padding:.65rem .8rem;background:var(--paper2);border-radius:10px}
 .raterow .ratelab{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;font-size:.82rem;font-weight:500;margin-bottom:.1rem}
@@ -98,13 +98,13 @@ h1,.dek,.hero .sub,.about .abv,.ctl .note,.tk .tkb,.gapcap,.pyrclar,.found,.traj
 .chartcap b{color:var(--ink);font-weight:500}
 .chartcap .cl,.seg-traj button[data-h]{cursor:pointer}
 .chartcap .cl{color:var(--clay);border-bottom:1px dotted var(--clay);font-weight:500}
-.chartcap .cl:hover{background:rgba(158,61,43,.08)}
-.chartcap .yrtog{color:var(--clay);font-weight:500;cursor:pointer;padding:0 .16em;border-radius:3px;background:linear-gradient(rgba(176,116,26,.30),rgba(176,116,26,.30));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.chartcap .yrtog:hover{background:linear-gradient(rgba(176,116,26,.52),rgba(176,116,26,.52));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center}
+.chartcap .cl:hover{background:rgba(200,38,28,.08)}
+.chartcap .yrtog{color:var(--ink);font-weight:500;cursor:pointer;padding:0 .16em;border-radius:3px;background:linear-gradient(rgba(244,208,63,.5),rgba(244,208,63,.5));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.chartcap .yrtog:hover{background:linear-gradient(rgba(244,208,63,.72),rgba(244,208,63,.72));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line);border-radius:3px;margin:.55rem 0 .1rem;outline:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid var(--panel);box-shadow:0 0 0 1px var(--clay);animation:thumbpulse 3.4s ease-in-out infinite}
-@keyframes thumbpulse{0%,100%{box-shadow:0 0 0 1px var(--clay),0 0 0 0 rgba(158,61,43,0)}50%{box-shadow:0 0 0 1px var(--clay),0 0 0 7px rgba(158,61,43,.15)}}
+@keyframes thumbpulse{0%,100%{box-shadow:0 0 0 1px var(--clay),0 0 0 0 rgba(200,38,28,0)}50%{box-shadow:0 0 0 1px var(--clay),0 0 0 7px rgba(200,38,28,.15)}}
 input[type=range]:focus-visible,.seg button:focus-visible,.ytoggle input:focus-visible,.fn:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
 .headline,.pctbox .pctn,.stat .n,.ctl .val,.ctl .derived,.gapcap,.about .num,.tier small{font-variant-numeric:tabular-nums}
 .seg{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
@@ -171,7 +171,7 @@ svg{display:block;width:100%;height:auto}
 .tier.tappable{cursor:pointer}
 .tier.tappable:hover{filter:brightness(1.08);transform:translateX(2px)}
 .tier .arrow{font-family:var(--mono);font-size:.7rem;opacity:.7}
-.tier.subcl{background:rgba(158,61,43,.28);color:var(--clay);border:1px dashed var(--clay)}
+.tier.subcl{background:rgba(200,38,28,.28);color:var(--clay);border:1px dashed var(--clay)}
 .tier.subcl small{opacity:1}
 .tier.subcl.off{background:transparent;color:var(--faint);border-color:var(--line)}
 .tier .pcite{color:#fff;border-bottom-color:rgba(255,255,255,.55)}
@@ -185,7 +185,7 @@ svg{display:block;width:100%;height:auto}
 .plabel .pv{font-family:var(--mono);font-weight:500;color:var(--clay);white-space:nowrap;font-variant-numeric:tabular-nums}
 .ptrack{border:1px dotted var(--line);border-radius:6px;padding:3px}
 .pbar{height:13px;border-radius:3px;transition:width .35s ease;min-width:10px}
-.pbar.subcl{background:rgba(158,61,43,.34)}
+.pbar.subcl{background:rgba(200,38,28,.34)}
 .pbar.subcl.off{background:transparent;min-width:0}
 .pyrhead{display:flex;justify-content:space-between;align-items:center;gap:.7rem 1rem;flex-wrap:wrap;margin:0 0 .55rem}
 .pyrhead h3{margin:0;flex:1 1 230px;font-family:var(--display);font-size:1.32rem;font-weight:500;letter-spacing:-.01em;text-transform:none;color:var(--ink);line-height:1.1}
@@ -205,7 +205,7 @@ svg{display:block;width:100%;height:auto}
 .fnum{font-family:var(--mono);font-weight:500;font-size:.92rem;color:var(--clay);white-space:nowrap;font-variant-numeric:tabular-nums}
 .fbarwrap{line-height:0}
 .fbar{display:inline-block;height:26px;border-radius:5px;transition:width .35s ease;min-width:46px;vertical-align:middle}
-.fbar.sub{background:rgba(158,61,43,.30);border:1px dashed var(--clay);box-sizing:border-box}
+.fbar.sub{background:rgba(200,38,28,.30);border:1px dashed var(--clay);box-sizing:border-box}
 .fbar.sub.off{background:transparent;opacity:.55}
 .fdesc{font-size:.72rem;color:var(--muted);margin-top:.32rem;text-wrap:pretty}
 .fwater{display:flex;align-items:center;gap:.7rem;max-width:320px;margin:1.3rem auto;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
@@ -217,8 +217,8 @@ svg{display:block;width:100%;height:auto}
 .found .foundlead{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:.35rem}
 .gapbar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.65rem 0 .4rem;background:var(--line)}
 .gapseg{height:100%;transition:width .3s}
-.gap-rec{background:#6E6857}
-.gap-un{background:#9E3D2B}
+.gap-rec{background:#6B6B6B}
+.gap-un{background:#C8261C}
 .gapcap{font-size:.76rem;line-height:1.5}
 .gapcap b{color:var(--ink);font-weight:500}
 .gapcap .un{color:var(--clay)}
@@ -236,7 +236,7 @@ svg{display:block;width:100%;height:auto}
 .bds a:hover{color:var(--clay);border-color:var(--clay)}
 footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1.2rem;font-size:.78rem;color:var(--muted)}
 footer a{color:var(--teal)} footer ol{margin:.5rem 0 0;padding-left:1.4rem} footer li{margin-bottom:.3rem}
-footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
+footer li:target{background:rgba(244,208,63,.4);border-radius:4px}
 .disc{font-size:.74rem;color:var(--faint);font-style:italic;margin-top:.4rem}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -379,9 +379,9 @@ footer li:target{background:rgba(176,116,26,.16);border-radius:4px}
         <div class="chartcap" id="chartCap"></div>
         <svg id="chart" viewBox="0 0 520 238" role="img" aria-label="Cumulative chronic risk by number of infections for four reinfection trajectories"></svg>
         <div class="legend">
-          <span><i style="background:#9E3D2B"></i>your scenario</span>
-          <span><i style="background:#B0741A"></i>other trajectories</span>
-          <span><i style="background:#0F6E56"></i>your infection count</span>
+          <span><i style="background:#C8261C"></i>your scenario</span>
+          <span><i style="background:#B08A2E"></i>other trajectories</span>
+          <span><i style="background:#1D4E78"></i>your infection count</span>
         </div>
         <div class="yearcap" id="yearCap" style="display:none">Each infection is placed in the calendar year it would land in at the average pace (~0.85 infections/yr, so the 5th ≈ 2026). Shaded = future.</div>
       </div>
@@ -438,7 +438,7 @@ const TRAJ_INFO={
   Compounds:{d:"Each reinfection adds more risk than the last. Organ damage builds up with every hit.",ev:"Bowe, Xie & Al-Aly, Nature Medicine 2022: cumulative risk rises with each infection.",href:"#s3"}
 };
 const TRAJ_OFF="Reinfection isn't modeled, matching Tian et al., who counted only each patient's first infection. Pick a trajectory above to project what repeat infections would add.";
-const COL={sel:"#9E3D2B",other:"#B0741A",mark:"#0F6E56"};
+const COL={sel:"#C8261C",other:"#B08A2E",mark:"#1D4E78"};
 const NMAX=10;
 const DEFAULTS={traj:null,avgInf:5,persist:0.90,infShare:0.90,chronRate:0.145,declRate:0.6,compRate:1.2,subclin:0};
 let S=Object.assign({yearLayer:false,hover:null},DEFAULTS);
@@ -463,21 +463,21 @@ function drawChart(baseC){
   const x0=62,x1=505,y0=18,y1=196,maxR=1;
   const X=k=>x0+(k-1)/(NMAX-1)*(x1-x0), Y=r=>y1-Math.min(r,maxR)/maxR*(y1-y0);
   const START=2020.2,PACE=(2026-START)/5,yearFor=k=>START+k*PACE,nowX=X(5);
-  let g='<defs><linearGradient id="selFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9E3D2B" stop-opacity="0.13"/><stop offset="100%" stop-color="#9E3D2B" stop-opacity="0"/></linearGradient></defs>';
-  if(S.yearLayer) g+=`<rect x="${nowX}" y="${y0}" width="${x1-nowX}" height="${y1-y0}" fill="#B0741A" fill-opacity=".07"/>`;
-  g+=`<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" stroke="#211F18" stroke-width="1"/>`;
-  g+=`<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="#211F18" stroke-width="1"/>`;
-  [0,.25,.5,.75,1].forEach(r=>{g+=`<text x="${x0-6}" y="${Y(r)+4}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="end">${Math.round(r*100)}%</text>`;
-    g+=`<line x1="${x0}" y1="${Y(r)}" x2="${x1}" y2="${Y(r)}" stroke="#211F18" stroke-opacity=".08"/>`;});
-  for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle">${k}</text>`;
-  g+=`<text x="${(x0+x1)/2}" y="230" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" letter-spacing=".4">Number of infections (per person)</text>`;
+  let g='<defs><linearGradient id="selFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8261C" stop-opacity="0.13"/><stop offset="100%" stop-color="#C8261C" stop-opacity="0"/></linearGradient></defs>';
+  if(S.yearLayer) g+=`<rect x="${nowX}" y="${y0}" width="${x1-nowX}" height="${y1-y0}" fill="#B08A2E" fill-opacity=".07"/>`;
+  g+=`<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" stroke="#161616" stroke-width="1"/>`;
+  g+=`<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="#161616" stroke-width="1"/>`;
+  [0,.25,.5,.75,1].forEach(r=>{g+=`<text x="${x0-6}" y="${Y(r)+4}" font-size="10" font-family="IBM Plex Mono" fill="#6B6B6B" text-anchor="end">${Math.round(r*100)}%</text>`;
+    g+=`<line x1="${x0}" y1="${Y(r)}" x2="${x1}" y2="${Y(r)}" stroke="#161616" stroke-opacity=".08"/>`;});
+  for(let k=1;k<=NMAX;k++) g+=`<text x="${X(k)}" y="${y1+16}" font-size="10" font-family="IBM Plex Mono" fill="#6B6B6B" text-anchor="middle">${k}</text>`;
+  g+=`<text x="${(x0+x1)/2}" y="230" font-size="10" font-family="IBM Plex Mono" fill="#6B6B6B" text-anchor="middle" letter-spacing=".4">Number of infections (per person)</text>`;
   const ymid=(y0+y1)/2;
-  g+=`<text x="12" y="${ymid}" font-size="10" font-family="IBM Plex Mono" font-weight="500" fill="#9E3D2B" text-anchor="middle" transform="rotate(-90 12 ${ymid})">Chronic condition</text>`;
-  g+=`<text x="24" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6E6857" text-anchor="middle" transform="rotate(-90 24 ${ymid})">cumulative chance (%)</text>`;
+  g+=`<text x="12" y="${ymid}" font-size="10" font-family="IBM Plex Mono" font-weight="500" fill="#C8261C" text-anchor="middle" transform="rotate(-90 12 ${ymid})">Chronic condition</text>`;
+  g+=`<text x="24" y="${ymid}" font-size="10" font-family="IBM Plex Mono" fill="#6B6B6B" text-anchor="middle" transform="rotate(-90 24 ${ymid})">cumulative chance (%)</text>`;
   if(S.yearLayer){
-    for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B0741A':'#6E6857'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
-    g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#211F18" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
-    g+=`<text x="${nowX+4}" y="${y1-5}" font-size="9" font-family="IBM Plex Mono" fill="#6E6857">2026 · now</text>`;
+    for(let k=1;k<=NMAX;k++){const yr=Math.round(yearFor(k));g+=`<text x="${X(k)}" y="${y0-5}" font-size="9" font-family="IBM Plex Mono" fill="${yearFor(k)>2026.1?'#B08A2E':'#6B6B6B'}" text-anchor="middle">'${String(yr).slice(2)}</text>`;}
+    g+=`<line x1="${nowX}" y1="${y0}" x2="${nowX}" y2="${y1}" stroke="#161616" stroke-opacity=".35" stroke-dasharray="2 2"/>`;
+    g+=`<text x="${nowX+4}" y="${y1-5}" font-size="9" font-family="IBM Plex Mono" fill="#6B6B6B">2026 · now</text>`;
   }
   ORDER.forEach(t=>{
     if(t===S.traj) return;
@@ -516,9 +516,9 @@ function drawPyramid(r){
     return `<div class="frow${tap}"><div class="flabel"><span class="frole">${role}${cite}${arrow}</span><span class="fnum">${num}</span></div><div class="fbarwrap"><div class="${barcls}" style="${st}"></div></div><div class="fdesc">${o.desc||''}</div></div>`;
   };
   let h='';
-  h+=frow("Officially counted now",M(coded),W(coded),"#8C8676",{cite:6,desc:"Adults who report Long COVID now in the CDC's national survey. The U09.9 billing code captures even fewer."});
-  h+=frow("Clinically detected, nationwide estimate",M(detected),W(detected),"#0F6E56",{desc:"Applying Tian et al.'s finding that review catches about 2× the diagnostic codes.<a class='fn' href='#s1'>1</a>"});
-  h+=frow("Ever-developed chronic conditions (your estimate)",M(ever),W(ever),"#9E3D2B",{ctl:"ctl-traj",desc:"Scaled to all U.S. adults, including those who have recovered"});
+  h+=frow("Officially counted now",M(coded),W(coded),"#A9A9A1",{cite:6,desc:"Adults who report Long COVID now in the CDC's national survey. The U09.9 billing code captures even fewer."});
+  h+=frow("Clinically detected, nationwide estimate",M(detected),W(detected),"#1D4E78",{desc:"Applying Tian et al.'s finding that review catches about 2× the diagnostic codes.<a class='fn' href='#s1'>1</a>"});
+  h+=frow("Ever-developed chronic conditions (your estimate)",M(ever),W(ever),"#C8261C",{ctl:"ctl-traj",desc:"Scaled to all U.S. adults, including those who have recovered"});
   h+='<div class="fwater">below the waterline</div>';
   h+= on ? frow("+ Subclinical impacts (combined)",M(subTotal),W(subTotal),null,{sub:true,ctl:"ctl-subclin",desc:"Measurable injury, no diagnosed condition"})
          : frow("+ Subclinical impacts",'off',W(maxV),null,{sub:true,off:true,ctl:"ctl-subclin",desc:"Speculative; dial it up in the sidebar"});
