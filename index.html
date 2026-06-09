@@ -24,7 +24,13 @@ h1{font-family:var(--display);font-weight:600;font-size:clamp(2rem,5.2vw,3.4rem)
 h1 em{font-style:italic;color:var(--clay)}
 .dek{font-size:clamp(1rem,1.8vw,1.18rem);color:var(--muted);max-width:80ch;margin:0 0 .9rem}
 .dek.lead{color:var(--ink);font-weight:500}
-.hl{background:linear-gradient(rgba(244,208,63,.55),rgba(244,208,63,.55));background-repeat:no-repeat;background-size:100% 1.05em;background-position:center;padding:0 .12em;font-weight:500;color:var(--ink);-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.leadq{margin:.35rem 0 1rem;scroll-margin-top:1rem}
+.leadq a{font-family:var(--display);font-weight:500;font-size:clamp(1.3rem,2.9vw,1.78rem);line-height:1.16;letter-spacing:-.01em;color:var(--ink);text-decoration:none;
+  background:linear-gradient(rgba(244,208,63,.62),rgba(244,208,63,.62));background-repeat:no-repeat;background-size:100% .42em;background-position:0 92%;padding:.02em .14em;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .18s}
+.leadq a:hover{background-size:100% 1.02em}
+.leadq a .arrow{font-family:var(--mono);font-weight:600;font-size:.62em;color:var(--clay);margin-left:.35em;display:inline-block;transition:transform .18s;vertical-align:.06em}
+.leadq a:hover .arrow{transform:translateY(3px)}
+.leadq a:focus-visible{outline:2px solid var(--clay);outline-offset:3px;border-radius:4px}
 .sechead{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.2vw,1.5rem);color:var(--ink);letter-spacing:-.01em;margin:0 0 .9rem}
 .rule{height:2px;background:var(--ink);width:54px;margin:0 0 1.6rem}
 .takeaways .tkh,.tk .tkt,.headline-lab{text-wrap:balance}
@@ -245,8 +251,8 @@ footer li:target{background:rgba(244,208,63,.4);border-radius:4px}
 <div class="wrap">
   <p class="kicker">Building on the findings of Tian et al., JAMA Network Open 2026</p>
   <h1>How many live with a <em>chronic</em> condition developed from a COVID infection?</h1>
-  <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that chronic conditions appearing after a COVID infection are far more common than diagnostic codes designed for long COVID capture. The study was conservative by design, given the gaps in the data.</p>
-  <p class="dek lead">So how many Americans actually have a chronic condition from COVID?</p>
+  <p class="dek">A 2026 study across <span class="hl">58 US hospitals</span> found that new chronic conditions after a COVID infection are far more common than diagnostic codes designed for long COVID capture. The study was conservative by design, given the gaps in the data.</p>
+  <p class="leadq"><a href="#estimator">So how many Americans actually have a chronic condition from COVID?<span class="arrow">↓</span></a></p>
   <p class="dek">Start from what the study measured, set the assumptions you find plausible, and get your estimate.</p>
   <div class="rule"></div>
 
@@ -283,7 +289,7 @@ footer li:target{background:rgba(244,208,63,.4);border-radius:4px}
 
   <div class="cite">Tian J, Azhir A, Decaro M, Chau N, Hügel J, Morris M, Cheng J, Fard P, Bassett IV, Bell DS, Bernstam EV, Visweswaran S, Klann JG, Murphy SN, Estiri H. <span class="srct">Long COVID Persistence and Surveillance Gaps Across 58 US Hospitals.</span> <em>JAMA Network Open.</em> 2026;9(5):e2614909. <a href="https://doi.org/10.1001/jamanetworkopen.2026.14909" target="_blank" rel="noopener">doi:10.1001/jamanetworkopen.2026.14909</a></div>
 
-  <div class="phasediv">
+  <div class="phasediv" id="estimator">
     <span class="ph ph-a">Measured</span>
     <span class="ph-arrow">now estimate it across all Americans ↓</span>
     <span class="ph ph-b">Your estimate</span>
